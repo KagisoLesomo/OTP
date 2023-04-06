@@ -33,25 +33,27 @@
 		</div>
 		
 		
-		<form class="join-form">
-			<div class="input-group" action="" method="post"> 
+		<form class="join-form" method="POST" action="signup.php">
+			<div class="input-group"> 
 				<label> Username: </label>
-				<input type="text" required>
+				<input type="text" name="username">
 			</div>
 			<div class="input-group"> 
 				<label> Email: </label>
-				<input type="email" required>
+				<input type="email" name="email">
 			</div>
-			<div class="input-group" required> 
+			<div class="input-group"> 
 				<label> Password: </label>
-				<input type="password">
+				<input type="password" name="password">
+			</div>
+			<div class="input-group"> 
+				<label> Confirm Password: </label>
+				<input type="password" name="confirm">
 			</div>
 			<div class="input-group"> 
 				<button type="submit" class="btn" >  Sign Up </button>
 			</div>
-			Already have an account?<a href="login.html">  Login </a>
 		</form>
-		
 	</section>
 	
 	
@@ -67,7 +69,7 @@
 					<li><a href="#">About Us</a></li>
 					<li><a href="#">Contact</a></li>
 				</ul>
-				Copyright &#169 2023 insert cool group name. All rights reserved.
+				Copyright &#169 2023 &#60insert cool group name &#47&#62. All rights reserved.
 			</nav>
 			<nav class="footer-nav"> 
 				<ul>

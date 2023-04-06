@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="styles.css" rel="stylesheet">
+  <link href="index.css" rel="stylesheet">
+  <title>insert cool group name - gamesPage </title>
+</head>
+
+<body class="full-height-grow">
+	<div class="container full-height-grow">
+	<header class="main-header">
+		<div href="index.html" class="brand-logo" >
+			<img src="logo.png">
+		</div>
+		<nav class="main-nav">
+			<ul>
+				<li> <a href="homepage.html"> Home </a> </li>		
+				<li> <a href="index.html"> <?= $_SESSION['player']['username'] ?> </a> </li>			
+			</ul>
+		</nav>
+	</header>
+
+
+<form class="join-form">
+    <div class="input-group"> 
+        <a type="button" class="btn" href="checkers.php">Checkers</a>
+    </div>
+    <div class="input-group"> 
+        <a type="button" class="btn" href="moregames.html">Another One</a>
+    </div>
+    <div class="input-group"> 
+        <a type="button" class="btn" href="moregames.html">The Last One</a>
+    </div>
+</form>
