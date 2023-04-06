@@ -11,6 +11,7 @@ body , html{
   justify-content: space-between;
   align-items: center;
   flex-grow: 1;
+  padding: 0 1.5rem 1.5rem 1.5rem 
 }
 
 .join-main-section img {
