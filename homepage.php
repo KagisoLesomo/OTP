@@ -32,7 +32,7 @@
 		<div href="/" class="left-join-section" >
 			<h3> 
 				While we wait for <span class="accent-text"> Senzo </span> 
-				to finish the homepage.. 
+				to finish the homepage... 
 			</h3>
 
 			<h1 class="join-text"> 
@@ -65,7 +65,7 @@
 					<li><a href="#">About Us</a></li>
 					<li><a href="#">Contact</a></li>
 				</ul>
-				Copyright &#169 2023 insert cool group name. All rights reserved.
+				Copyright &#169 2023 &#60insert cool group name &#47&#62. All rights reserved.
 			</nav>
 			<nav class="footer-nav"> 
 				<ul>
