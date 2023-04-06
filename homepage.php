@@ -49,10 +49,10 @@
 				<a type="button" class="btn" href="checkers.php">Checkers</a>
 			</div>
 			<div class="input-group"> 
-				<a type="button" class="btn" href="#">Another One</a>
+				<a type="button" class="btn" href="moregames.html">Another One</a>
 			</div>
 			<div class="input-group"> 
-				<a type="button" class="btn" href="#">The Last One</a>
+				<a type="button" class="btn" href="moregames.html">The Last One</a>
 			</div>
 		</form>
 	</section>
