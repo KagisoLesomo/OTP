@@ -33,25 +33,27 @@
 		</div>
 		
 		
-		<form class="join-form">
-			<div class="input-group" action="" method="post"> 
+		<form class="join-form" method="POST" action="signup.php">
+			<div class="input-group"> 
 				<label> Username: </label>
-				<input type="text" required>
+				<input type="text" name="username">
 			</div>
 			<div class="input-group"> 
 				<label> Email: </label>
-				<input type="email" required>
+				<input type="email" name="email">
 			</div>
-			<div class="input-group" required> 
+			<div class="input-group"> 
 				<label> Password: </label>
-				<input type="password">
+				<input type="password" name="password">
+			</div>
+			<div class="input-group"> 
+				<label> Confirm: </label>
+				<input type="password" name="confirm">
 			</div>
 			<div class="input-group"> 
 				<button type="submit" class="btn" >  Sign Up </button>
 			</div>
-			Already have an account?<a href="login.html">  Login </a>
 		</form>
-		
 	</section>
 	
 	

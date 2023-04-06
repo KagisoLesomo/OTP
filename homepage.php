@@ -1,0 +1,78 @@
+<?php 
+	require_once("functions.php")
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="styles.css" rel="stylesheet">
+  <link href="index.css" rel="stylesheet">
+  <title>insert cool group name - homepage </title>
+</head>
+
+<body class="full-height-grow">
+	<div class="container full-height-grow">
+	<header class="main-header">
+		<div href="index.html" class="brand-logo" >
+			<img src="logo.png">
+		</div>
+		<nav class="main-nav">
+			<ul>
+				<li> <a href="index.html"> Play On </a> </li>		
+				<li> <a href="index.html"> <?= $_SESSION['player']['username'] ?> </a> </li>			
+			</ul>
+		</nav>
+	</header>
+	
+	<section class="join-main-section"> 
+		
+		<div href="/" class="left-join-section" >
+			<h3> 
+				While we wait for <span class="accent-text"> Senzo </span> 
+				to finish the homepage.. 
+			</h3>
+
+			<h1 class="join-text"> 
+				Welcome to <br> the 
+				<span class="accent-text"> club. </span>
+			</h1>
+		
+			<img src="checkers-pink.png" alt="Neon Checkers Board">
+		</div>
+		
+		
+		<form class="join-form">
+			<div class="input-group"> 
+				<a type="button" class="btn" href="checkers.php">Checkers</a>
+			</div>
+			<div class="input-group"> 
+				<a type="button" class="btn" href="#">Another One</a>
+			</div>
+			<div class="input-group"> 
+				<a type="button" class="btn" href="#">The Last One</a>
+			</div>
+		</form>
+	</section>
+	</div>
+	
+	<footer class="main-footer"> 
+		<div class="container">
+			<nav class="footer-nav"> 
+				<ul>
+					<li><a href="#">About Us</a></li>
+					<li><a href="#">Contact</a></li>
+				</ul>
+				Copyright &#169 2023 insert cool group name. All rights reserved.
+			</nav>
+			<nav class="footer-nav"> 
+				<ul>
+					<li> Ayanda | Cwenga | Kagiso | Nqobile | Senzo | Tsholo </li>
+				</ul>
+			</nav>
+		</div>
+	</footer>
+</body>
+</html>
