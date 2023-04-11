@@ -1,8 +1,10 @@
 
-/*=========variabile globale=========================*/
+// global game variables
 
 
 var square_class = document.getElementsByClassName("square");
+
+// variables for checker pieces
 var white_checker_class = document.getElementsByClassName("white_checker");
 var black_checker_class = document.getElementsByClassName("black_checker");
 var table = document.getElementById("table");
@@ -20,7 +22,7 @@ var moveLength = 80 ;
 var moveDeviation = 10;
 var Dimension = 1;
 var selectedPiece,selectedPieceindex;
-var upRight,upLeft,downLeft,downRight;  // toate variantele posibile de mers pt o  dama
+var upRight,upLeft,downLeft,downRight;  
 var contor = 0 , gameOver = 0;
 var bigScreen = 1;
 
@@ -31,7 +33,7 @@ var the_checker ;
 var oneMove;
 var anotherMove;
 var mustAttack = false;
-var multiplier = 1 // 2 daca face saritura 1 in caz contrat
+var multiplier = 1 
 
 var tableLimit,reverse_tableLimit ,  moveUpLeft,moveUpRight, moveDownLeft,moveDownRight , tableLimitLeft, tableLimitRight;
 
@@ -46,8 +48,7 @@ var tableLimit,reverse_tableLimit ,  moveUpLeft,moveUpRight, moveDownLeft,moveDo
 		moveDeviation = 6;
 	}
 
-/*================declararea claselor=========*/
-
+// class variable for the square pieces
 var square_p = function(square,index){
 	this.id = square;
 	this.ocupied = false;
@@ -100,8 +101,7 @@ checker.prototype.checkIfKing = function () {
 	}
 }
 
-/*===============Initializarea campurilor de joc =================================*/
-
+// initializing the required board squares
 
 for (var i = 1; i <=64; i++)
 	block[i] =new square_p(square_class[i],i);
@@ -109,9 +109,7 @@ for (var i = 1; i <=64; i++)
 /*==================================================*/
 
 
-/*================initializarea damelor =================================*/
-
-	// damele albe 
+// initializing the game pieces
 for (var i = 1; i <= 4; i++){
 	w_checker[i] = new checker(white_checker_class[i], "white", 2*i -1 );
 	w_checker[i].setCoord(0,0);
@@ -133,7 +131,8 @@ for (var i = 9; i <= 12; i++){
 	block[2*i - 1].pieceId = w_checker[i];
 }
 
-//damele negre
+
+// initializing the next pieces
 for (var i = 1; i <= 4; i++){
 	b_checker[i] = new checker(black_checker_class[i], "black", 56 + 2*i  );
 	b_checker[i].setCoord(0,0);
@@ -159,14 +158,11 @@ for (var i = 9; i <= 12; i++){
 
 
 
-/*================SELECTIA UNEI PIESE==============*/
+//select the piece to move
+
 the_checker = w_checker;
 
 function showMoves (piece) {
-	/* daca a fost selectat inainte o piesa stergem drumurile ei actualizand nu drumurile  Game made by Cojocaru Calin George all rights reserved piesei noi s
-	electat
-  
-	*/
 	
 	var match = false;
 	mustAttack = false;
@@ -174,7 +170,7 @@ function showMoves (piece) {
 			erase_roads(selectedPiece);
 	}
 	selectedPiece = piece;
-	var i,j; // retine indicele damei
+	var i,j; // indexes
 	for ( j = 1; j <= 12; j++){
 		if(the_checker[j].id == piece){
 			i = j;
@@ -193,7 +189,7 @@ function showMoves (piece) {
 	}
 
 	if(!match) {
-	 return 0 ; // daca nu a fost gasit nicio potrivire ; se intampla cand de exemplu rosu muta iar tu apasi pe negru
+	 return 0 ; // 
 	}
 
 	/*===acum in functie de culoarea lor setez marginile si miscarile damei===*/
