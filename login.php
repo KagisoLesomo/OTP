@@ -10,3 +10,4 @@ if (login_user($username, $password)) {
 } else {
     header("Location: login.html");
 }
+?>
