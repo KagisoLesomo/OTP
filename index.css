@@ -200,6 +200,17 @@ body , html{
   border-radius: 5px;
 }
 
+.landing-container {
+	background-color: #E3C3CE;
+	width: 46vw;
+	max-width: 65%;
+	padding: 1.5rem 2.7rem 0 2.7rem;
+	border-radius: 20px;
+	margin-bottom: 2rem;
+	align-items: center;
+	justify-content: center;
+}
+
 .join-form a {
 	border: none;
 }
@@ -214,7 +225,7 @@ body , html{
 	  display: none;
   }
   
-  .profile-container, .update-container {
+  .profile-container {
 	  margin-top: 2rem;
   }
 
