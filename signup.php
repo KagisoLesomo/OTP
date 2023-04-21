@@ -33,7 +33,7 @@ $sql = "INSERT INTO player (
 )";
 
 if($conn->query($sql)) {
-    header("Location: homepage.php");
+    header("Location: login.html");
 } else {
     header("Location: index.html");
 }

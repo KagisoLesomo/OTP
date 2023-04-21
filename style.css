@@ -12,10 +12,10 @@ height: 80px;
 }
 
 .white_square{
-background-color:#F0D2B4;
+background-color:#fb2394;
 }
 .black_square{
-background-color :#BA7A3A;
+background-color :#8c1394;
 }
 .clear_float{
 clear: both;
@@ -74,7 +74,7 @@ transition: 0.3s ease-in-out;
 }
 
 .black_checker{
-background: #00001F;
+background: #0b0bfa;
 -webkit-transition: 0.3s ease-in-out;
 -moz-transition: 0.3s ease-in-out;
 -o-transition: 0.3s ease-in-out;
