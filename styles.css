@@ -82,6 +82,7 @@ body {
 }
 
 .main-footer {
+	
 	padding: 10px 10px 0px 10px;
 	bottom: 0;
 	width: 100%;
@@ -120,16 +121,6 @@ body {
 	
 }
 
-.landing-nav .btn {
-	padding: 1.5rem;
-	padding-left: 2.5rem;
-	padding-right: 2.5rem;
-	border: 2px solid black;
-	margin: 2rem;
-	font-size: 1.85rem;
-	margin-bottom: 2rem;
-}
-
 .btn:hover {
 	background-color: #BB2058;
 }
@@ -143,6 +134,7 @@ body {
 	display: flex;
 	margin: 0;
 	margin-right: 10px;
+	margin-bottom: 2rem;
 	padding: 1.1rem;
 	list-style: none;
 	justify-content: center;
@@ -165,6 +157,7 @@ body {
 }
 
 .btn-signup {
-    margin-right: 15px;
+	border: 2px solid black;
+    	margin-right: 2rem;
 	text-align: center;
 }

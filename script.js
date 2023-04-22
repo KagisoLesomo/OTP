@@ -1,41 +1,49 @@
 
-// global game variables
+/*=========global variables=========================*/
 
 
 var square_class = document.getElementsByClassName("square");
 
-// variables for checker pieces
 var white_checker_class = document.getElementsByClassName("white_checker");
 var black_checker_class = document.getElementsByClassName("black_checker");
+
 var table = document.getElementById("table");
 var score = document.getElementById("score");
+
 var black_background = document.getElementById("black_background");
 var moveSound = document.getElementById("moveSound");
 var winSound = document.getElementById("winSound");
+
 var windowHeight = window.innerHeight
-|| document.documentElement.clientHeight
-|| document.body.clientHeight;  ;
+				|| document.documentElement.clientHeight
+				|| document.body.clientHeight;
+
 var windowWidth =  window.innerWidth
-|| document.documentElement.clientWidth
-|| document.body.clientWidth;
+				|| document.documentElement.clientWidth
+				|| document.body.clientWidth;
+
 var moveLength = 80 ;
 var moveDeviation = 10;
 var Dimension = 1;
-var selectedPiece,selectedPieceindex;
-var upRight,upLeft,downLeft,downRight;  
-var contor = 0 , gameOver = 0;
+
+var selectedPiece, selectedPieceindex;
+var upRight, upLeft, downLeft, downRight;  // all possible moves for a piece
+
+var contor = 0, gameOver = 0;
 var bigScreen = 1;
 
 var block = [];
 var w_checker = [];
 var b_checker = [];
-var the_checker ;
+var the_checker;
+
 var oneMove;
 var anotherMove;
-var mustAttack = false;
-var multiplier = 1 
 
-var tableLimit,reverse_tableLimit ,  moveUpLeft,moveUpRight, moveDownLeft,moveDownRight , tableLimitLeft, tableLimitRight;
+var mustAttack = false;
+var multiplier = 1 // 2 if he jumps 1 piece
+
+var tableLimit, reverse_tableLimit,  moveUpLeft, moveUpRight, moveDownLeft, moveDownRight, tableLimitLeft, tableLimitRight;
 
 /*================================*/
 	getDimension();
@@ -48,8 +56,9 @@ var tableLimit,reverse_tableLimit ,  moveUpLeft,moveUpRight, moveDownLeft,moveDo
 		moveDeviation = 6;
 	}
 
-// class variable for the square pieces
-var square_p = function(square,index){
+/*================class declaration=========*/
+
+var square_p = function(square, index){
 	this.id = square;
 	this.ocupied = false;
 	this.pieceId = undefined;
@@ -58,120 +67,131 @@ var square_p = function(square,index){
 	}
 }
 
-var checker = function(piece,color,square) {
+var checker = function(piece, color, square) {
 	this.id = piece;
 	this.color = color;
 	this.king = false;
 	this.ocupied_square = square;
 	this.alive = true;
 	this.attack = false;
+
 	if(square%8){
 		this.coordX= square%8;
-		this.coordY = Math.floor(square/8) + 1 ;
-	}
-	else{
+		this.coordY = Math.floor(square/8) + 1;
+	}else{
 		this.coordX = 8;
-		this.coordY = square/8 ;
+		this.coordY = square/8;
 	}
-	this.id.onclick = function  () {
+
+	this.id.onclick = function() {
 		showMoves(piece);	
 	}
 }
 
 checker.prototype.setCoord = function(X,Y){
-	var x = (this.coordX - 1  ) * moveLength + moveDeviation;
-	var y = (this.coordY - 1 ) * moveLength  + moveDeviation;
+	var x = (this.coordX - 1) * moveLength + moveDeviation;
+	var y = (this.coordY - 1) * moveLength  + moveDeviation;
 	this.id.style.top = y + 'px';
 	this.id.style.left = x + 'px';
 }
 
 checker.prototype.changeCoord = function(X,Y){
-	this.coordY +=Y;
+	this.coordY += Y;
 	this.coordX += X;
 }
 
-checker.prototype.checkIfKing = function () {
-	if(this.coordY == 8 && !this.king &&this.color == "white"){
+checker.prototype.checkIfKing = function() {
+	if(this.coordY == 8 && !this.king && this.color == "white"){
 		this.king = true;
 		this.id.style.border = "4px solid #FFFF00";
 	}
-	if(this.coordY == 1 && !this.king &&this.color == "black"){
+	if(this.coordY == 1 && !this.king && this.color == "black"){
 		this.king = true;
 		this.id.style.border = "4px solid #FFFF00";
 	}
 }
 
-// initializing the required board squares
+/*===============Initialization of playing fields =================================*/
+
 
 for (var i = 1; i <=64; i++)
-	block[i] =new square_p(square_class[i],i);
+	block[i] = new square_p(square_class[i], i);
 
 /*==================================================*/
 
 
-// initializing the game pieces
+/*================checkers initialization =================================*/
+
+// red pieces
+
 for (var i = 1; i <= 4; i++){
-	w_checker[i] = new checker(white_checker_class[i], "white", 2*i -1 );
+	w_checker[i] = new checker(white_checker_class[i], "white", 2*i - 1);
 	w_checker[i].setCoord(0,0);
 	block[2*i - 1].ocupied = true;
-	block[2*i - 1].pieceId =w_checker[i];
+	block[2*i - 1].pieceId = w_checker[i];
 }
 
 for (var i = 5; i <= 8; i++){
-	w_checker[i] = new checker(white_checker_class[i], "white", 2*i );
+	w_checker[i] = new checker(white_checker_class[i], "white", 2*i);
 	w_checker[i].setCoord(0,0);
 	block[2*i].ocupied = true;
 	block[2*i].pieceId = w_checker[i];
 }
 
 for (var i = 9; i <= 12; i++){
-	w_checker[i] = new checker(white_checker_class[i], "white", 2*i - 1 );
+	w_checker[i] = new checker(white_checker_class[i], "white", 2*i - 1);
 	w_checker[i].setCoord(0,0);
 	block[2*i - 1].ocupied = true;
 	block[2*i - 1].pieceId = w_checker[i];
 }
 
+// blue pieces
 
-// initializing the next pieces
 for (var i = 1; i <= 4; i++){
-	b_checker[i] = new checker(black_checker_class[i], "black", 56 + 2*i  );
+	b_checker[i] = new checker(black_checker_class[i], "black", 56 + 2*i);
 	b_checker[i].setCoord(0,0);
-	block[56 +  2*i ].ocupied = true;
-	block[56+  2*i ].pieceId =b_checker[i];
+	block[56 + 2*i ].ocupied = true;
+	block[56 + 2*i ].pieceId = b_checker[i];
 }
 
 for (var i = 5; i <= 8; i++){
-	b_checker[i] = new checker(black_checker_class[i], "black", 40 +  2*i - 1 );
+	b_checker[i] = new checker(black_checker_class[i], "black", 40 + 2*i - 1);
 	b_checker[i].setCoord(0,0);
-	block[ 40 + 2*i - 1].ocupied = true;
-	block[ 40 + 2*i - 1].pieceId = b_checker[i];
+	block[40 + 2*i - 1].ocupied = true;
+	block[40 + 2*i - 1].pieceId = b_checker[i];
 }
 
 for (var i = 9; i <= 12; i++){
-	b_checker[i] = new checker(black_checker_class[i], "black", 24 + 2*i  );
+	b_checker[i] = new checker(black_checker_class[i], "black", 24 + 2*i);
 	b_checker[i].setCoord(0,0);
-	block[24 + 2*i ].ocupied = true;
-	block[24 + 2*i ].pieceId = b_checker[i];
+	block[24 + 2*i].ocupied = true;
+	block[24 + 2*i].pieceId = b_checker[i];
 }
 
 /*========================================================*/
 
 
 
-//select the piece to move
-
+/*================SELECTING A PIECE==============*/
 the_checker = w_checker;
 
-function showMoves (piece) {
+function showMoves(piece) {
+	
+	/* if a track was previously selected, we delete its tracks by updating not the tracks to the new track voter	*/
 	
 	var match = false;
 	mustAttack = false;
+
 	if(selectedPiece){
 			erase_roads(selectedPiece);
 	}
+
 	selectedPiece = piece;
-	var i,j; // indexes
-	for ( j = 1; j <= 12; j++){
+
+	var i, j; // retain the queen index
+
+	for (j = 1; j <= 12; j++){
+
 		if(the_checker[j].id == piece){
 			i = j;
 			selectedPieceindex = j;
@@ -179,7 +199,7 @@ function showMoves (piece) {
 		}
 	}
 
-	if(oneMove && !attackMoves(oneMove)){
+	if(oneMove && !attackMoves(oneMove)){										// check what it does
 		changeTurns(oneMove);
 		oneMove = undefined;
 		return false;
@@ -189,10 +209,11 @@ function showMoves (piece) {
 	}
 
 	if(!match) {
-	 return 0 ; // 
+	 return 0; // if no match was found; it happens when, for example, red moves and you press blue
 	}
 
-	/*===acum in functie de culoarea lor setez marginile si miscarile damei===*/
+	/*===now, depending on their color, I set the edges and the queen's movements===*/
+
 	if(the_checker[i].color =="white"){
 		tableLimit = 8;
 		tableLimitRight = 1;
@@ -211,50 +232,55 @@ function showMoves (piece) {
 		moveDownRight = 9;
 		moveDownLeft = 7;
 	}
- 	/*===========VERIFIC DACA POT ATACA====*/
+ 	/*===========CHECKING IF I CAN ATTACK====*/
 
 
-		attackMoves(the_checker[i]); // verifica daca am vreo miscare de atac
+		attackMoves(the_checker[i]); // check if I have any attack moves
 	
 
-	/*========DACA NU POT ATACA VERIFIC DACA POT MERGE======*/
+	/*========IF I CAN'T ATTACK I CHECK IF I CAN GO======*/
 
  	if(!mustAttack){
- 	  downLeft = checkMove( the_checker[i] , tableLimit , tableLimitRight , moveUpRight , downLeft);
-		downRight = checkMove( the_checker[i] , tableLimit , tableLimitLeft , moveUpLeft , downRight);
+		
+		downLeft = checkMove(the_checker[i], tableLimit, tableLimitRight, moveUpRight, downLeft);
+		downRight = checkMove( the_checker[i], tableLimit, tableLimitLeft, moveUpLeft, downRight);
+
 		if(the_checker[i].king){
-			upLeft = checkMove( the_checker[i] , reverse_tableLimit , tableLimitRight , moveDownRight , upLeft);
-			upRight = checkMove( the_checker[i], reverse_tableLimit , tableLimitLeft , moveDownLeft, upRight)
+			upLeft = checkMove(the_checker[i], reverse_tableLimit, tableLimitRight, moveDownRight, upLeft);
+			upRight = checkMove(the_checker[i], reverse_tableLimit, tableLimitLeft, moveDownLeft, upRight);
 		}
 	}
+
 	if(downLeft || downRight || upLeft || upRight){
-			return true;
-		}
+		return true;
+	}
+
 	return false;
-	
 }
 
 
 function erase_roads(piece){
-	if(downRight) block[downRight].id.style.background = "#BA7A3A";
-	if(downLeft) block[downLeft].id.style.background = "#BA7A3A";
-	if(upRight) block[upRight].id.style.background = "#BA7A3A";
-	if(upLeft) block[upLeft].id.style.background = "#BA7A3A";
+	if(downRight) block[downRight].id.style.background = "#8c1394";
+	if(downLeft) block[downLeft].id.style.background = "#8c1394";
+	if(upRight) block[upRight].id.style.background = "#8c1394";
+	if(upLeft) block[upLeft].id.style.background = "#8c1394";
 }
 		
-/*=============MUTAREA PIESEI======*/
+/*=============MOVING THE PIECE======*/
 
-function makeMove (index) {
+function makeMove(index) {
 	var isMove = false;
-	if(!selectedPiece) // daca jocu de abea a inceput si nu a fost selectata nicio piesa
+
+	if(!selectedPiece) // if the game has started and no piece has been selected
 		return false;
+
 	if(index != upLeft && index != upRight && index != downLeft && index != downRight){
 		erase_roads(0);
 		selectedPiece = undefined;
 		return false;
 	}
 
- /* =========perspectiva e a jucatorului care muta ======*/
+ /* ========= the perspective is of the player who moves ======*/
 	if(the_checker[1].color=="white"){
 		cpy_downRight = upRight;
 		cpy_downLeft = upLeft;
@@ -268,36 +294,38 @@ function makeMove (index) {
 		cpy_upRight = downLeft;
 	}  
 
-	if(mustAttack)  // ca sa stiu daca sar doar un rand sau 2 
+	if(mustAttack)  // to know if I skip only one row or 2
 		multiplier = 2;
 	else
 		multiplier = 1;
 
 
 		if(index == cpy_upRight){
-			isMove = true;		
+			isMove = true;	
+				
 			if(the_checker[1].color=="white"){
-				// muta piesa
-				executeMove( multiplier * 1, multiplier * 1, multiplier * 9 );
-				//elimina piesa daca a fost executata o saritura
+				// move the piece
+				executeMove(multiplier * 1, multiplier * 1, multiplier * 9);
+
+				//remove the piece if a jump was executed
 				if(mustAttack) eliminateCheck(index - 9);
 			}
 			else{
-				executeMove( multiplier * 1, multiplier * -1, multiplier * -7);
-				if(mustAttack) eliminateCheck( index + 7 );
+				executeMove(multiplier * 1, multiplier * -1, multiplier * -7);
+				if(mustAttack) eliminateCheck(index + 7);
 			}
 		}
 
 		if(index == cpy_upLeft){
-	
 			isMove = true;
+
 			if(the_checker[1].color=="white"){
-				executeMove( multiplier * -1, multiplier * 1, multiplier * 7);
-			 	if(mustAttack)	eliminateCheck(index - 7 );				
+				executeMove(multiplier * -1, multiplier * 1, multiplier * 7);
+			 	if(mustAttack)	eliminateCheck(index - 7);				
 			}
 			else{
-				executeMove( multiplier * -1, multiplier * -1, multiplier * -9);
-				if (mustAttack) eliminateCheck( index + 9 );
+				executeMove(multiplier * -1, multiplier * -1, multiplier * -9);
+				if (mustAttack) eliminateCheck(index + 9);
 			}
 		}
 
@@ -305,25 +333,26 @@ function makeMove (index) {
 
 			if(index == cpy_downRight){
 				isMove = true;
+
 				if(the_checker[1].color=="white"){
-					executeMove( multiplier * 1, multiplier * -1, multiplier * -7);
-					if(mustAttack) eliminateCheck ( index  + 7) ;
+					executeMove(multiplier * 1, multiplier * -1, multiplier * -7);
+					if(mustAttack) eliminateCheck (index  + 7) ;
 				}
 				else{
-					executeMove( multiplier * 1, multiplier * 1, multiplier * 9);
-					if(mustAttack) eliminateCheck ( index  - 9) ;
+					executeMove(multiplier * 1, multiplier * 1, multiplier * 9);
+					if(mustAttack) eliminateCheck ( index  - 9);
 				}
 			}
 
 		if(index == cpy_downLeft){
 			isMove = true;
 				if(the_checker[1].color=="white"){
-					executeMove( multiplier * -1, multiplier * -1, multiplier * -9);
-					if(mustAttack) eliminateCheck ( index  + 9) ;
+					executeMove(multiplier * -1, multiplier * -1, multiplier * -9);
+					if(mustAttack) eliminateCheck (index  + 9);
 				}
 				else{
-					executeMove( multiplier * -1, multiplier * 1, multiplier * 7);
-					if(mustAttack) eliminateCheck ( index  - 7) ;
+					executeMove(multiplier * -1, multiplier * 1, multiplier * 7);
+					if(mustAttack) eliminateCheck ( index  - 7);
 				}
 			}
 		}
@@ -331,13 +360,15 @@ function makeMove (index) {
 	erase_roads(0);
 	the_checker[selectedPieceindex].checkIfKing();
 
-	// schimb randul
+	// I change the turn
 	if (isMove) {
-			playSound(moveSound);
-			anotherMove = undefined;
-		 if(mustAttack) {
-			 	anotherMove = attackMoves(the_checker[selectedPieceindex]);
-		 }
+		playSound(moveSound);
+		anotherMove = undefined;
+
+		if(mustAttack) {
+		 	anotherMove = attackMoves(the_checker[selectedPieceindex]);
+		}
+
 		if (anotherMove){
 			oneMove = the_checker[selectedPieceindex];
 			showMoves(oneMove);
@@ -353,88 +384,95 @@ function makeMove (index) {
 	}
 }
 
-/*===========MUTAREA PIESEI-SCHIMBAREA COORDONATELOR======*/
+/*===========MOVING THE PIECE - CHANGING THE COORDINATES======*/
 
-function executeMove (X,Y,nSquare){
-	// schimb coordonate piesei mutate
-	the_checker[selectedPieceindex].changeCoord(X,Y); 
+function executeMove(X, Y, nSquare) {
+
+	// change the coordinates of the moved piece
+	the_checker[selectedPieceindex].changeCoord(X, Y); 
 	the_checker[selectedPieceindex].setCoord(0,0);
-	// eliberez campul pe care il ocupa piesa si il ocup pe cel pe care il va ocupa
-	block[the_checker[selectedPieceindex].ocupied_square].ocupied = false;			
-	//alert (the_checker[selectedPieceindex].ocupied_square);
-	block[the_checker[selectedPieceindex].ocupied_square + nSquare].ocupied = true;
-	block[the_checker[selectedPieceindex].ocupied_square + nSquare].pieceId = 	block[the_checker[selectedPieceindex].ocupied_square ].pieceId;
-	block[the_checker[selectedPieceindex].ocupied_square ].pieceId = undefined; 	
-	the_checker[selectedPieceindex].ocupied_square += nSquare;
 
+	// I release the field the piece occupies and occupy the one it will occupy
+	block[the_checker[selectedPieceindex].ocupied_square].ocupied = false;	
+
+	block[the_checker[selectedPieceindex].ocupied_square + nSquare].ocupied = true;
+	block[the_checker[selectedPieceindex].ocupied_square + nSquare].pieceId = 	block[the_checker[selectedPieceindex].ocupied_square].pieceId;
+	block[the_checker[selectedPieceindex].ocupied_square].pieceId = undefined; 	
+	the_checker[selectedPieceindex].ocupied_square += nSquare;
 }
 
-function checkMove(Apiece,tLimit,tLimit_Side,moveDirection,theDirection){
+function checkMove(Apiece, tLimit, tLimit_Side, moveDirection, theDirection){
+
 	if(Apiece.coordY != tLimit){
-		if(Apiece.coordX != tLimit_Side && !block[ Apiece.ocupied_square + moveDirection ].ocupied){
-			block[ Apiece.ocupied_square + moveDirection ].id.style.background = "#704923";
+
+		if(Apiece.coordX != tLimit_Side && !block[Apiece.ocupied_square + moveDirection].ocupied){
+			block[Apiece.ocupied_square + moveDirection].id.style.background = "#500b94";
 			theDirection = Apiece.ocupied_square + moveDirection;
 		}
-	else
+		else
 			theDirection = undefined;
 	}
 	else
 		theDirection = undefined;
+
 	return theDirection;
 }
 
 
 
-function  checkAttack( check , X, Y , negX , negY, squareMove, direction){
-	if(check.coordX * negX >= 	X * negX && check.coordY *negY <= Y * negY && block[check.ocupied_square + squareMove ].ocupied && block[check.ocupied_square + squareMove].pieceId.color != check.color && !block[check.ocupied_square + squareMove * 2 ].ocupied){
+function  checkAttack(check , X, Y , negX , negY, squareMove, direction){
+
+	if(check.coordX * negX >= X * negX && check.coordY * negY <= Y * negY && block[check.ocupied_square + squareMove].ocupied && block[check.ocupied_square + squareMove].pieceId.color != check.color && !block[check.ocupied_square + squareMove * 2].ocupied){
 		mustAttack = true;
-		direction = check.ocupied_square +  squareMove*2 ;
-		block[direction].id.style.background = "#704923";
-		return direction ;
+		direction = check.ocupied_square +  squareMove*2;
+		block[direction].id.style.background = "#7db2a9";
 	}
 	else
 		direction =  undefined;
-		return direction;
+	
+	return direction;
 }
 
 function eliminateCheck(indexx){
 	if(indexx < 1 || indexx > 64)
 		return  0;
 
-	var x =block[ indexx ].pieceId ;
-	x.alive =false;
-	block[ indexx ].ocupied = false;
+	var x = block[indexx].pieceId;
+	x.alive = false;
+	block[indexx].ocupied = false;
 	x.id.style.display  = "none";
 }
 
  	
 function attackMoves(ckc){
 
- 		upRight = undefined;
- 		upLeft = undefined;
- 		downRight = undefined;
- 		downLeft = undefined;
+ 	upRight = undefined;
+ 	upLeft = undefined;
+ 	downRight = undefined;
+ 	downLeft = undefined;
 
- 	if(ckc.king ){
+ 	if(ckc.king){
+
  		if(ckc.color == "white"){
-			upRight = checkAttack( ckc , 6, 3 , -1 , -1 , -7, upRight );
-			upLeft = checkAttack( ckc, 3 , 3 , 1 , -1 , -9 , upLeft );
+			upRight = checkAttack(ckc, 6, 3, -1, -1, -7, upRight);
+			upLeft = checkAttack(ckc, 3, 3, 1, -1, -9, upLeft);
 		}
 		else{
-	 		downLeft = checkAttack( ckc , 3, 6, 1 , 1 , 7 , downLeft );
-			downRight = checkAttack( ckc , 6 , 6 , -1, 1 ,9 , downRight );		
+	 		downLeft = checkAttack(ckc, 3, 6, 1, 1, 7, downLeft);
+			downRight = checkAttack(ckc, 6, 6, -1, 1, 9, downRight);		
 		}
 	}
+
 	if(ckc.color == "white"){
-	 	downLeft = checkAttack( ckc , 3, 6, 1 , 1 , 7 , downLeft );
-		downRight = checkAttack( ckc , 6 , 6 , -1, 1 ,9 , downRight );
+	 	downLeft = checkAttack(ckc, 3, 6, 1, 1, 7, downLeft);
+		downRight = checkAttack(ckc, 6, 6, -1, 1, 9, downRight);
 	}
 	else{
-		upRight = checkAttack( ckc , 6, 3 , -1 , -1 , -7, upRight );
-		upLeft = checkAttack( ckc, 3 , 3 , 1 , -1 , -9 , upLeft );
+		upRight = checkAttack(ckc, 6, 3, -1, -1, -7, upRight);
+		upLeft = checkAttack(ckc, 3, 3, 1, -1, -9, upLeft);
 	}
  	
- 	if(ckc.color== "black" && (upRight || upLeft || downLeft || downRight ) ) {
+ 	if(ckc.color == "black" && (upRight || upLeft || downLeft || downRight)) {
 	 	var p = upLeft;
 	 	upLeft = downLeft;
 	 	downLeft = p;
@@ -451,19 +489,21 @@ function attackMoves(ckc){
 	 	upRight = upLeft;
 	 	upLeft = p;
  	}
+
  	if(upLeft != undefined || upRight != undefined || downRight != undefined || downLeft != undefined){
  		return true;
-
  	}
+
  	return false;
 }
 
 function changeTurns(ckc){
-		if(ckc.color=="white")
-	the_checker = b_checker;
-else
-	the_checker = w_checker;
- }
+
+	if(ckc.color=="white")
+		the_checker = b_checker;
+	else
+		the_checker = w_checker;
+}
 
 function checkIfLost(){
 	var i;
@@ -473,7 +513,7 @@ function checkIfLost(){
 	return true;
 }
 
-function  checkForMoves(){
+function checkForMoves(){
 	var i ;
 	for(i = 1 ; i <= 12; i++)
 		if(the_checker[i].alive && showMoves(the_checker[i].id)){
@@ -500,13 +540,14 @@ function playSound(sound){
 
 
 function getDimension (){
-	contor ++;
- windowHeight = window.innerHeight
-	|| document.documentElement.clientHeight
-	|| document.body.clientHeight;  ;
- windowWidth =  window.innerWidth
-	|| document.documentElement.clientWidth
-	|| document.body.clientWidth;
+	contor++;
+
+	windowHeight = window.innerHeight
+				|| document.documentElement.clientHeight
+				|| document.body.clientHeight;  
+	windowWidth =  window.innerWidth
+				|| document.documentElement.clientWidth
+				|| document.body.clientWidth;
 }
 
 

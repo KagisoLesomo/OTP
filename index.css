@@ -190,6 +190,16 @@ body , html{
 	border: 2px solid black;
 }
 
+.landing-nav .btn {
+	padding: 1.5rem;
+	padding-left: 2.5rem;
+	padding-right: 2.5rem;
+	border: 2px solid black;
+	margin: 2rem;
+	font-size: 1.85rem;
+	margin-bottom: 5rem;
+}
+
 .input-group input {
   outline: none;
   background: white;
@@ -201,6 +211,7 @@ body , html{
 }
 
 .landing-container {
+	margin-left: 3.5rem;
 	background-color: #E3C3CE;
 	width: 46vw;
 	max-width: 65%;

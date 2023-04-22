@@ -22,7 +22,7 @@
 		<nav class="main-nav">
 			<ul>
 				<li> <a href="index.html"> Play On </a> </li>		
-				<li> <a href="index.html"> <?= $_SESSION['player']['username'] ?> </a> </li>			
+				<li> <a href="profile-page.php"> <?= $_SESSION['player']['username'] ?> </a> </li>			
 			</ul>
 		</nav>
 	</header>
@@ -46,7 +46,7 @@
 		
 		<form class="join-form">
 			<div class="input-group"> 
-				<a type="button" class="btn" href="checkers.php">Checkers</a>
+				<a type="button" class="btn" href="enterGame.php">Checkers</a>
 			</div>
 			<div class="input-group"> 
 				<a type="button" class="btn" href="moregames.html">Another One</a>
