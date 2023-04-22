@@ -120,6 +120,16 @@ body {
 	
 }
 
+.landing-nav .btn {
+	padding: 1.5rem;
+	padding-left: 2.5rem;
+	padding-right: 2.5rem;
+	border: 2px solid black;
+	margin: 2rem;
+	font-size: 1.85rem;
+	margin-bottom: 2rem;
+}
+
 .btn:hover {
 	background-color: #BB2058;
 }
