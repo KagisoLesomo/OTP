@@ -1,7 +1,7 @@
 <?php
-$hostName = "10.100.15.216";
-$userName = "student";
-$password = "soole7ah";
+$hostName = "localhost";
+$userName = "root";
+$password = "";
 $databaseName = "codingstatus";
  $conn = new mysqli($hostName, $userName, $password, $databaseName);
 // Check connection
