@@ -1,5 +1,37 @@
 <?php
-	require_once("functions.php")
+
+session_start();
+$user_id = $_SESSION['player']['id'];
+
+   global $conn;
+   $conn = mysqli_connect('localhost','root','','checkers');
+   
+if(isset($_POST['update_info'])){
+	
+   $update_name = mysqli_real_escape_string($conn, $_POST['username']);
+   $update_email = mysqli_real_escape_string($conn, $_POST['email']);
+
+   mysqli_query($conn, "UPDATE `player` SET username = '$update_name', email = '$update_email' WHERE id = '$user_id'") or die('query failed');
+
+   $old_pass = $_POST['old_pass'];
+   $update_pass = mysqli_real_escape_string($conn, password_hash($_POST['update_pass'], PASSWORD_DEFAULT));
+   $new_pass = mysqli_real_escape_string($conn, password_hash($_POST['new_pass'], PASSWORD_DEFAULT));
+   $confirm_pass = mysqli_real_escape_string($conn, password_hash($_POST['confirm_pass'], PASSWORD_DEFAULT));
+
+   if(!empty($update_pass) || !empty($new_pass) || !empty($confirm_pass)){
+      if(!password_verify($_POST['update_pass'], $old_pass)){
+         $message[] = 'old password not matched!';
+      }elseif(trim($_POST['new_pass']) != trim($_POST['confirm_pass'])){
+         $message[] = 'confirm password not matched!';
+      }else{
+         mysqli_query($conn, "UPDATE `player` SET password = '$confirm_pass' WHERE id = '$user_id'") or die('query failed');
+         $message[] = 'password updated successfully!';
+		 header("Location: profile-page.php");
+      }
+   }
+   
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -18,8 +50,8 @@
 <body class="full-height-grow">
 	<div class="container full-height-grow">
 	<header class="main-header">
-		<div href="index.html" class="brand-logo" >
-			<img src="logo.png">
+		<div class="brand-logo">
+			<a href="homepage.php"> <img src="logo.png"> </a>
 		</div>
 		<nav class="main-nav">
 			<ul>
@@ -32,12 +64,19 @@
 	</header>
 	
 	<section class="join-main-section"> 
+		<?php
+			global $conn;
+			$select = mysqli_query($conn, "SELECT * FROM `player` WHERE id = '$user_id'") or die('query failed');
+			if(mysqli_num_rows($select) > 0){
+				$user = mysqli_fetch_assoc($select);
+			}
+		?>
 		
 		<div href="/" class="left-join-section" >
 		
 			<img src="profile-icon.png" alt="Profile Pic :)">
 			<h1> 
-				<?= $_SESSION['player']['username'] ?> <span class="material-icons" style="color: rgb(26, 103, 203);">verified</span><br>
+				<?= htmlspecialchars($user["username"]) ?> <span class="material-icons" style="color: rgb(26, 103, 203);">verified</span><br>
 			</h1>
 			<h3> Certified Grandmaster </h3> 
 			<br>
@@ -54,29 +93,37 @@
 			</div>
 			<h1> Profile </h1>
 			
-			<form method="POST" class="update-info-container">
+			<form method="POST" class="update-info-container" action="">
+				<?php
+					if(isset($message)){
+						foreach($message as $message){
+							echo '<div class="subtitle">'.$message.'</div>';
+						}
+					}
+				?>
 				<div class="input-group"> 
 					<label> Username: </label>
-					<input type="text" id="username" value="<?= $_SESSION['player']['username'] ?>" name="username">
+					<input type="text" id="username" value="<?= htmlspecialchars($user["username"]) ?>" name="username">
 				</div>
 				<div class="input-group"> 
 					<label> Email: </label>
-					<input type="text" id="email" value="<?= $_SESSION['player']['email'] ?>" name="email">
+					<input type="text" id="email" value="<?= htmlspecialchars($user["email"]) ?>" name="email">
 				</div>
-				<div class="input-group"> 
+				<div class="input-group">
+					<input type="hidden" name="old_pass" value="<?php echo $user['password']; ?>">				
 					<label> Current Password: </label>
-					<input type="password" id="password" value="" name="password">
+					<input type="password" id="password" value="" name="update_pass">
 				</div>
 				<div class="input-group"> 
 					<label> New Password: </label>
-					<input type="password" id="new_password" value="" name="new_password">
+					<input type="password" id="new_password" value="" name="new_pass">
 				</div>
 				<div class="input-group"> 
 					<label> Confirm New Password: </label>
-					<input type="password" id="confirm_password" value="" name="confirm_password">
+					<input type="password" id="confirm_password" value="" name="confirm_pass">
 				</div>
 				<div class="input-group"> 
-					<button type="submit" class="btn"> Update info </button>
+					<button type="submit" class="btn" name="update_info"> Update info </button>
 				</div>
 			</form>			
 		</div>
