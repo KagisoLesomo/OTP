@@ -6,8 +6,11 @@ echo "<pre>";
 
 $id = $_SESSION['player']['id'];
 
-if (db_update('player', ["checkers" => 1], "id={$id}")){
-    header("Location: matching.php");
-}else{
-    print_r("Check your code :(");
-}
+db_update('player', ["checkers" => 1], "id={$id}")
+
+?>
+
+
+<?php header("Location: matching.php"); ?>
+
+

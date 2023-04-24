@@ -28,7 +28,7 @@ body , html{
 	margin: 0;
 }
 
-.call-to-action img, {
+.call-to-action img {
 	max-height: 20vh;
 	max-width: 20vw;
 	padding-left: 100px;
@@ -50,6 +50,7 @@ body , html{
 	margin: 0;
 	padding: 0;	
 }
+
 
 .accent-text {
   color: #BC3A80;
@@ -75,6 +76,11 @@ body , html{
 	border-radius: 20px;
 }
 
+.join-form a {
+	color:  #E3C3CE;
+	margin-bottom: 1rem;
+}
+
 .update-container {
 	background-color: #E3C3CE;
 	width: 65vw;
@@ -98,6 +104,11 @@ body , html{
 	font-size: 2.5rem;
 	justify-content: left;
 	align-items: left;
+}
+
+.landing-container h1 {
+	justify-content: center;
+	align-items: center;
 }
 
 .update-container h1 {
@@ -192,10 +203,8 @@ body , html{
 
 .landing-nav .btn {
 	padding: 1.5rem;
-	padding-left: 2.5rem;
-	padding-right: 2.5rem;
 	border: 2px solid black;
-	margin: 2rem;
+	margin: 0.5rem;
 	font-size: 1.85rem;
 	margin-bottom: 5rem;
 }
@@ -211,15 +220,19 @@ body , html{
 }
 
 .landing-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 	margin-left: 3.5rem;
 	background-color: #E3C3CE;
-	width: 46vw;
-	max-width: 65%;
+	width: 50%;
+	max-width: 80%;
 	padding: 1.5rem 2.7rem 0 2.7rem;
 	border-radius: 20px;
 	margin-bottom: 2rem;
-	align-items: center;
-	justify-content: center;
+	
+	
 }
 
 .join-form a {
@@ -244,6 +257,11 @@ body , html{
     width: 80vw;
     max-width: inherit;
     margin: 2rem 0;
+  }
+  
+  .landing-container {
+    flex-direction: column;
+    justify-content: center;
   }
 }
 

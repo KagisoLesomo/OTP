@@ -18,47 +18,19 @@
 <div class="checker black_checker" style="display:none"> </div>
 <div class="square" style="display: none" id ="ht"> </div>
 
-<div><?= $_SESSION['player']['username'] ?></div>
-
 <div class="black_background" id="black_background"> </div>
 
 	<div class="score" id="score"><br></div>
 
-<div class="table" id="table">
-
-	<?php
-		$result = db_select('player', "id = {$_SESSION['player']['id']}");
-
-		if ($result[0]["gameColor"] == "blue") {
+	<?php 
+if($_SESSION['opponent']['gameColor'] == "red" || $_SESSION["player"]["gameColor"] == "blue") { 
 	?>
+	<div class="label"><?= $_SESSION['opponent']['username'] ?></div>
+<?php } else { ?>
+	<div class="label"><?= $_SESSION['player']['username'] ?></div>
+<?php } ?>
 
-	<div class="checker white_checker" style="background: #0b0bfa"> </div>
-	<div class="checker white_checker" style="background: #0b0bfa"> </div>
-	<div class="checker white_checker" style="background: #0b0bfa"> </div>
-	<div class="checker white_checker" style="background: #0b0bfa"> </div>
-	<div class="checker white_checker" style="background: #0b0bfa"> </div>
-	<div class="checker white_checker" style="background: #0b0bfa"> </div>
-	<div class="checker white_checker" style="background: #0b0bfa"> </div>
-	<div class="checker white_checker" style="background: #0b0bfa"> </div>	
-	<div class="checker white_checker" style="background: #0b0bfa"> </div>
-	<div class="checker white_checker" style="background: #0b0bfa"> </div>
-	<div class="checker white_checker" style="background: #0b0bfa"> </div>
-	<div class="checker white_checker" style="background: #0b0bfa"> </div>	 
-
-	<div class="checker black_checker" style="background: #CC0000"> </div>
-	<div class="checker black_checker" style="background: #CC0000"> </div>
-	<div class="checker black_checker" style="background: #CC0000"> </div>
-	<div class="checker black_checker" style="background: #CC0000"> </div>
-	<div class="checker black_checker" style="background: #CC0000"> </div>
-	<div class="checker black_checker" style="background: #CC0000"> </div>
-	<div class="checker black_checker" style="background: #CC0000"> </div>
-	<div class="checker black_checker" style="background: #CC0000"> </div>
-	<div class="checker black_checker" style="background: #CC0000"> </div>
-	<div class="checker black_checker" style="background: #CC0000"> </div>
-	<div class="checker black_checker" style="background: #CC0000"> </div>
-	<div class="checker black_checker" style="background: #CC0000"> </div>
-
-	<?php } else { ?>
+<div class="table" id="table">	
 
 	<div class="checker white_checker"> </div>
 	<div class="checker white_checker"> </div>
@@ -85,8 +57,6 @@
 	<div class="checker black_checker"> </div>
 	<div class="checker black_checker"> </div>
 	<div class="checker black_checker"> </div>
-
-	<?php }?>
 
 	<div class="square black_square"> </div>
 	<div class="square white_square"> </div>
@@ -170,9 +140,15 @@
 
 </div>
 
-<div><?= $_SESSION['opponent']['username'] ?></div>
+<?php 
 
-<a href="endGame.php" type="button">End Game</a>
+if($_SESSION["player"]["gameColor"] == "red" || $_SESSION['opponent']['gameColor'] == "blue") { ?>
+	<div class="label"><?= $_SESSION['opponent']['username'] ?></div>
+<?php } else { ?>
+	<div class="label"><?= $_SESSION['player']['username'] ?></div>
+<?php } ?>
+
+<div class="end"><a href="endGame.php">End Game</a></div>
 
 <audio id="moveSound">
 	<source src = "sounds/move.mp3"> 

@@ -1,6 +1,15 @@
 
 /*=========global variables=========================*/
+var turn;
+var side;
+var opponent = false;
+var indy;
 
+var w_prev = 0;
+var b_prev = 0;
+
+checkSide();
+console.log(side);
 
 var square_class = document.getElementsByClassName("square");
 
@@ -111,6 +120,21 @@ checker.prototype.checkIfKing = function() {
 	}
 }
 
+function checkSide() {
+	var xhr = new XMLHttpRequest();
+
+	xhr.open('GET', 'getSide.php', false);
+
+	xhr.onload = function() {
+		if (this.status == 200) {
+			info = JSON.parse(this.responseText);
+	
+			side = info[0].gameColor;
+		}
+	}
+	xhr.send();
+}
+
 /*===============Initialization of playing fields =================================*/
 
 
@@ -173,17 +197,335 @@ for (var i = 9; i <= 12; i++){
 
 
 /*================SELECTING A PIECE==============*/
-the_checker = w_checker;
+
+
+function checkTurn() {
+	var xhr = new XMLHttpRequest();
+
+	xhr.open('GET', 'getSide.php', false);
+
+	xhr.onload = function() {
+		if (this.status == 200) {
+			info = JSON.parse(this.responseText);
+	
+			turn = info[0].turn;
+		}
+	}
+	xhr.send();
+}
+
+function fetchOpMove() {
+	var xhr = new XMLHttpRequest();
+
+	xhr.open('GET', 'fetchOpMove.php', false);
+
+	xhr.onload = function() {
+		if (this.status == 200) {
+			info = JSON.parse(this.responseText);
+	
+			indy = info[0].move;
+		}
+	}
+	xhr.send();
+}
+
+function fetchOpPrevW() {
+	var xhr = new XMLHttpRequest();
+
+	xhr.open('GET', 'fetchOpMove.php', false);
+
+	xhr.onload = function() {
+		if (this.status == 200) {
+			info = JSON.parse(this.responseText);
+	
+			w_prev = info[0].w_prev;
+		}
+	}
+	xhr.send();
+}
+
+function fetchOpPrevB() {
+	var xhr = new XMLHttpRequest();
+
+	xhr.open('GET', 'fetchOpMove.php', false);
+
+	xhr.onload = function() {
+		if (this.status == 200) {
+			info = JSON.parse(this.responseText);
+	
+			b_prev = info[0].b_prev;
+		}
+	}
+	xhr.send();
+}
+
+function fetchOpPiece() {
+	var xhr = new XMLHttpRequest();
+
+	xhr.open('GET', 'fetchOpMove.php', false);
+
+	xhr.onload = function() {
+		if (this.status == 200) {
+			info = JSON.parse(this.responseText);
+	
+			selectedPieceindex = info[0].pieceIndex;
+		}
+	}
+	xhr.send();
+}
+
+function fetchUpRight() {
+	var xhr = new XMLHttpRequest();
+
+	xhr.open('GET', 'fetchOpMove.php', false);
+
+	xhr.onload = function() {
+		if (this.status == 200) {
+			info = JSON.parse(this.responseText);
+	
+			upRight = info[0].upRight;
+		}
+	}
+	xhr.send();
+}
+
+function fetchDownRight() {
+	var xhr = new XMLHttpRequest();
+
+	xhr.open('GET', 'fetchOpMove.php', false);
+
+	xhr.onload = function() {
+		if (this.status == 200) {
+			info = JSON.parse(this.responseText);
+	
+			downRight = info[0].downRight;
+		}
+	}
+	xhr.send();
+}
+
+function fetchUpLeft() {
+	var xhr = new XMLHttpRequest();
+
+	xhr.open('GET', 'fetchOpMove.php', false);
+
+	xhr.onload = function() {
+		if (this.status == 200) {
+			info = JSON.parse(this.responseText);
+	
+			upLeft = info[0].upLeft;
+		}
+	}
+	xhr.send();
+}
+
+function fetchDownLeft() {
+	var xhr = new XMLHttpRequest();
+
+	xhr.open('GET', 'fetchOpMove.php', false);
+
+	xhr.onload = function() {
+		if (this.status == 200) {
+			info = JSON.parse(this.responseText);
+	
+			downLeft = info[0].downLeft;
+		}
+	}
+	xhr.send();
+}
+
+function fetchAttack() {
+	var xhr = new XMLHttpRequest();
+
+	xhr.open('GET', 'fetchOpMove.php', false);
+
+	xhr.onload = function() {
+		if (this.status == 200) {
+			info = JSON.parse(this.responseText);
+
+			if (info[0].attack == 0) {
+				mustAttack = false;
+			}else {
+				mustAttack = true;
+			}
+		}
+	}
+	xhr.send();
+}
+	
+function checkState() {
+	checkTurn();
+		
+		if (turn == "white"){
+			the_checker = w_checker;
+		} else {
+			the_checker = b_checker;
+		}
+
+	
+	fetchOpPrevW();
+	fetchOpPrevB();
+
+	console.log(turn);
+	console.log(w_prev);
+	console.log(b_prev);
+
+	if (side == "blue" && turn == "black" && w_prev != 0) {
+		fetchUpRight();
+		fetchUpLeft();
+		fetchDownRight();
+		fetchDownLeft();
+
+		fetchAttack();
+
+		the_checker = w_checker;
+		fetchOpMove();
+		fetchOpPiece();
+		console.log(selectedPieceindex);
+		selectedPiece = true;
+		makeMove2(indy);
+		w_prev = 0;
+		getWPrev();
+		selectedPieceindex = undefined;
+		selectedPiece = undefined;
+		the_checker = b_checker;
+
+		upRight = undefined;
+		downRight = undefined;
+		upLeft = undefined;
+		downLeft = undefined;
+
+		mustAttack = false;
+
+		getDownRightL();
+		getDownLeftL();
+		getUpRightL();
+		getUpLeftL();
+		getattackL();
+
+		var i;
+		var lost = true;
+		for(i = 1 ; i <= 12; i++){
+			if(the_checker[i].alive){
+				lost = false;
+			}
+		}
+		if (lost) {
+			setTimeout(declareWinner(),3000);
+			return false
+		}
+	}
+
+	if (side == "red" && turn == "white" && b_prev != 0) {
+		fetchUpRight();
+		fetchUpLeft();
+		fetchDownRight();
+		fetchDownLeft();
+
+		fetchAttack();
+
+		the_checker = b_checker;
+		fetchOpMove();
+		fetchOpPiece();
+		selectedPiece = true;
+		makeMove2(indy);
+		b_prev = 0;
+		getBPrev();
+		selectedPieceindex = undefined;
+		selectedPiece = undefined;
+		the_checker = w_checker;
+
+		upRight = undefined;
+		downRight = undefined;
+		upLeft = undefined;
+		downLeft = undefined;
+
+		mustAttack = false;
+
+		getDownRightL();
+		getDownLeftL();
+		getUpRightL();
+		getUpLeftL();
+		getattackL();
+
+		var i;
+		var lost = true;
+		for(i = 1 ; i <= 12; i++){
+			if(the_checker[i].alive){
+				lost = false;
+			}
+		}
+		if (lost) {
+			setTimeout(declareWinner(),3000);
+			return false
+		}
+	}
+	
+}
+
+function getUpLeftL() {
+	
+	var xhr = new XMLHttpRequest();
+
+	xhr.open('GET', 'processSome.php?ul='+0, true);
+
+	xhr.send();
+}
+
+function getattackL() {
+	
+	var xhr = new XMLHttpRequest();
+
+	xhr.open('GET', 'processSome.php?at='+0, true);
+
+	xhr.send();
+}
+
+function getUpRightL() {
+
+	var xhr = new XMLHttpRequest();
+
+	xhr.open('GET', 'processSome.php?ur='+0, true);
+
+	xhr.send();
+}
+
+function getDownLeftL() {
+
+	var xhr = new XMLHttpRequest();
+
+	xhr.open('GET', 'processSome.php?dl='+0, true);
+
+	xhr.send();
+}
+
+function getDownRightL() {
+
+	var xhr = new XMLHttpRequest();
+
+	xhr.open('GET', 'processSome.php?dr='+0, true);
+
+	xhr.send();
+}
+
+setInterval(checkState, 1000);
 
 function showMoves(piece) {
 	
 	/* if a track was previously selected, we delete its tracks by updating not the tracks to the new track voter	*/
+
+
+	// else if (side == "red" && the_checker[1].color == 'black') {
+	// 	fetchOpMove();
+	// 	console.log(index);
+	// 	makeMove2(index);
+	// }
 	
 	var match = false;
 	mustAttack = false;
 
 	if(selectedPiece){
-			erase_roads(selectedPiece);
+		erase_roads(selectedPiece);
 	}
 
 	selectedPiece = piece;
@@ -268,7 +610,131 @@ function erase_roads(piece){
 		
 /*=============MOVING THE PIECE======*/
 
+function getWPrev() {
+	
+	var xhr = new XMLHttpRequest();
+
+	xhr.open('GET', 'processPrev.php?w_prev='+w_prev, true);
+
+	xhr.send();
+}
+
+function getBPrev() {
+
+	var xhr = new XMLHttpRequest();
+
+	xhr.open('GET', 'processPrev.php?b_prev='+b_prev, true);
+
+	xhr.send();
+}
+
+function getUpLeft() {
+	
+	var xhr = new XMLHttpRequest();
+
+	xhr.open('GET', 'processSome.php?ul='+upLeft, true);
+
+	xhr.send();
+}
+
+function getUpRight() {
+
+	var xhr = new XMLHttpRequest();
+
+	xhr.open('GET', 'processSome.php?ur='+upRight, true);
+
+	xhr.send();
+}
+
+function getDownLeft() {
+
+	var xhr = new XMLHttpRequest();
+
+	xhr.open('GET', 'processSome.php?dl='+downLeft, true);
+
+	xhr.send();
+}
+
+function getDownRight() {
+
+	var xhr = new XMLHttpRequest();
+
+	xhr.open('GET', 'processSome.php?dr='+downRight, true);
+
+	xhr.send();
+}
+
+function getAttack() {
+
+	var xhr = new XMLHttpRequest();
+
+	var num = 0;
+
+	if (mustAttack){
+		num = 1;
+	}
+
+	xhr.open('GET', 'processSome.php?at='+num, true);
+
+	xhr.send();
+}
+
+
 function makeMove(index) {
+
+	function getMove() {
+	
+		var xhr = new XMLHttpRequest();
+	
+		xhr.open('GET', 'processMove.php?move='+index, true);
+
+		w_prev = index;
+
+		xhr.send();
+	}
+
+	function getOpMove() {
+	
+		var xhr = new XMLHttpRequest();
+	
+		xhr.open('GET', 'processMove.php?move='+index, true);
+
+		b_prev = index;
+
+		xhr.send();
+	}
+
+	function getPiece() {
+	
+		var xhr = new XMLHttpRequest();
+	
+		xhr.open('GET', 'processPiece.php?piece='+selectedPieceindex, true);
+
+		xhr.send();
+	}
+
+	if (side == "red" && the_checker[1].color == 'white') {
+		getMove();
+		getWPrev();
+		getPiece();
+		getUpLeft();
+		getUpRight();
+		getDownLeft();
+		getDownRight();
+		getAttack();
+	}
+
+	if (side == "blue" && the_checker[1].color == 'black') {
+		getOpMove();
+		getBPrev();
+		getPiece();
+		getUpLeft();
+		getUpRight();
+		getDownLeft();
+		getDownRight();
+		getAttack();
+	}
+
 	var isMove = false;
 
 	if(!selectedPiece) // if the game has started and no piece has been selected
@@ -374,14 +840,158 @@ function makeMove(index) {
 			showMoves(oneMove);
 		}
 		else{
+
 			oneMove = undefined;
 		 	changeTurns(the_checker[1]);
+			 
 		 	gameOver = checkIfLost();
 		 	if(gameOver) { setTimeout( declareWinner(),3000 ); return false};
 		 	gameOver = checkForMoves();
 		 	if(gameOver) { setTimeout( declareWinner() ,3000) ; return false};
 		}
 	}
+
+	
+}
+
+function makeMove2(index) {
+
+	index = parseInt(index);
+
+	var isMove = false;
+
+	if(!selectedPiece) // if the game has started and no piece has been selected
+		return false;
+
+	if(index != upLeft && index != upRight && index != downLeft && index != downRight){
+		erase_roads(0);
+		selectedPiece = undefined;
+		return false;
+	}
+
+ /* ========= the perspective is of the player who moves ======*/
+	if(the_checker[1].color=="white"){
+		cpy_downRight = upRight;
+		cpy_downLeft = upLeft;
+		cpy_upLeft = downLeft;
+		cpy_upRight = downRight;
+	}
+	else{
+		cpy_downRight = upLeft;
+		cpy_downLeft = upRight;
+		cpy_upLeft = downRight;
+		cpy_upRight = downLeft;
+	}  
+
+	if(mustAttack) {
+		multiplier = 2;
+	} // to know if I skip only one row or 2
+	else
+		multiplier = 1;
+
+
+		if(index == cpy_upRight){
+			isMove = true;	
+				
+			if(the_checker[1].color=="white"){
+				// move the piece
+				executeMove(multiplier * 1, multiplier * 1, multiplier * 9);
+
+				//remove the piece if a jump was executed
+				if(mustAttack) eliminateCheck(index - 9);
+			}
+			else{
+				console.log("Dafuq");
+				console.log(mustAttack);
+				console.log(multiplier);
+				executeMove(multiplier * 1, multiplier * -1, multiplier * -7);
+				if(mustAttack  || multiplier == 2) {
+					eliminateCheck(index + 7);
+				}
+			}
+		}
+
+		if(index == cpy_upLeft){
+			isMove = true;
+
+			if(the_checker[1].color=="white"){
+				executeMove(multiplier * -1, multiplier * 1, multiplier * 7);
+			 	if(mustAttack)	eliminateCheck(index - 7);				
+			}
+			else{
+				console.log('Dafuq');
+				console.log(mustAttack);
+				console.log(multiplier);
+				executeMove(multiplier * -1, multiplier * -1, multiplier * -9);
+				if (mustAttack  || multiplier == 2) {
+					eliminateCheck(index + 9);
+				} 
+			}
+		}
+
+		if(the_checker[selectedPieceindex].king){
+
+			if(index == cpy_downRight){
+				isMove = true;
+
+				if(the_checker[1].color=="white"){
+					executeMove(multiplier * 1, multiplier * -1, multiplier * -7);
+					if(mustAttack) eliminateCheck(index  + 7) ;
+				}
+				else{
+					console.log("Dafuq");
+					console.log(mustAttack);
+					console.log(multiplier);
+					executeMove(multiplier * 1, multiplier * 1, multiplier * 9);
+					if(mustAttack  || multiplier == 2) {
+						eliminateCheck(index  - 9);
+					} 
+				}
+			}
+
+		if(index == cpy_downLeft){
+			isMove = true;
+				if(the_checker[1].color=="white"){
+					executeMove(multiplier * -1, multiplier * -1, multiplier * -9);
+					if(mustAttack) eliminateCheck(index  + 9);
+				}
+				else{
+					console.log("Dafuq");
+					console.log(mustAttack);
+					console.log(multiplier);
+					executeMove(multiplier * -1, multiplier * 1, multiplier * 7);
+					if(mustAttack  || multiplier == 2) {
+						eliminateCheck(index  - 7);
+					}
+				}
+			}
+		}
+
+	//erase_roads(0);
+	the_checker[selectedPieceindex].checkIfKing();
+
+	// I change the turn
+// 	if (isMove) {
+// 		playSound(moveSound);
+// 		anotherMove = undefined;
+
+// 		if(mustAttack) {
+// 		 	anotherMove = attackMoves(the_checker[selectedPieceindex]);
+// 		}
+
+// 		if (anotherMove){
+// 			oneMove = the_checker[selectedPieceindex];
+// 			showMoves(oneMove);
+// 		}
+// 		else{
+// 			oneMove = undefined;
+// 		 	changeTurns(the_checker[1]);
+// 		 	gameOver = checkIfLost();
+// 		 	if(gameOver) { setTimeout( declareWinner(),3000 ); return false};
+// 		 	gameOver = checkForMoves();
+// 		 	if(gameOver) { setTimeout( declareWinner() ,3000) ; return false};
+// 		}
+// 	}
 }
 
 /*===========MOVING THE PIECE - CHANGING THE COORDINATES======*/
@@ -434,8 +1044,16 @@ function  checkAttack(check , X, Y , negX , negY, squareMove, direction){
 }
 
 function eliminateCheck(indexx){
+	if (side == "red") {
+		console.log(indexx);
+	}
+
 	if(indexx < 1 || indexx > 64)
 		return  0;
+
+	if (side == "red") {
+		console.log("Killed");
+	}	
 
 	var x = block[indexx].pieceId;
 	x.alive = false;
@@ -497,12 +1115,24 @@ function attackMoves(ckc){
  	return false;
 }
 
+function serverTurn(c) {
+	var xhr = new XMLHttpRequest();
+	
+	xhr.open('GET', 'processTurn.php?turn='+c, true);
+
+	xhr.send();
+}
+
 function changeTurns(ckc){
 
-	if(ckc.color=="white")
+	if(ckc.color=="white"){
 		the_checker = b_checker;
-	else
+		serverTurn("black");
+	}	
+	else {
 		the_checker = w_checker;
+		serverTurn("white");
+	}
 }
 
 function checkIfLost(){
@@ -527,9 +1157,9 @@ function declareWinner(){
 	playSound(winSound);
 	black_background.style.display = "inline";
 	score.style.display = "block";
-0
+
 if(the_checker[1].color == "white")
-	score.innerHTML = "Black wins";
+	score.innerHTML = "Blue wins";
 else
 	score.innerHTML = "Red wins";
 }
@@ -576,7 +1206,3 @@ if(windowWidth > 650){
 	}
 	}
 }
-
-
-
-

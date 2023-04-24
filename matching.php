@@ -38,12 +38,9 @@ if (count($result) != 0) {
         db_update('player', ['gameOpp' => $_SESSION['player']['username'], 'gameId' => $token, 'gameColor' => 'blue'], "id = {$_SESSION['opponent']['id']}");
 
         header("Location: checkers.php");
-    }else {
-        db_update('player', ["checkers" => 0], "id={$id}");
-        header("Location: homepage.php");
+        die();
     }
-}else {
-
-    db_update('player', ["checkers" => 0], "id={$id}");
-    header("Location: homepage.php");
 }
+
+db_update('player', ["checkers" => 0], "id={$id}");
+header("Location: homepage.php");

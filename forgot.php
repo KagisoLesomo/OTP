@@ -40,7 +40,7 @@ require "mail.php";
 				$code = $_POST['code'];
 				$result = is_code_correct($code);
 
-				if($result == "the code is correct"){
+				if($result == "The code is correct"){
 
 					$_SESSION['forgot']['code'] = $code;
 					header("Location: forgot.php?mode=enter_password");
@@ -82,7 +82,7 @@ require "mail.php";
 		
 		global $con;
 
-		$expire = time() + (60 * 1);
+		$expire = time() + (60 * 5);
 		$code = rand(10000,99999);
 		$email = addslashes($email);
 
@@ -90,7 +90,7 @@ require "mail.php";
 		mysqli_query($con,$query);
 
 		//send email here
-		send_mail($email,'OTP: Password Reset',"Your code is " . $code);
+		send_mail($email,'OTP: Password Reset',"Your password reset code is " . $code);
 	}
 	
 	function save_password($password){
@@ -138,12 +138,12 @@ require "mail.php";
 				$row = mysqli_fetch_assoc($result);
 				if($row['expire'] > $expire){
 
-					return "the code is correct";
+					return "The code is correct";
 				}else{
-					return "the code is expired";
+					return "The code has expired";
 				}
 			}else{
-				return "the code is incorrect";
+				return "The code is incorrect";
 			}
 		}
 

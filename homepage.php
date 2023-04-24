@@ -10,6 +10,8 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link href="styles.css" rel="stylesheet">
   <link href="index.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/93116e28c5.js" crossorigin="anonymous"></script>
   <title>insert cool group name - homepage </title>
 </head>
 
@@ -24,25 +26,21 @@
 				<li> <a href="homepage.php"> Play Now </a> </li>
 				<li> <a href="#"> Spectate </a> </li>
 				<li> <a href="prevgames/html.php"> Game History </a> </li>
-				<li> <a href="profile-page.php"> <em><u> <?= $_SESSION['player']['username'] ?> </u></em> </a> </li>			
+				<li> <a href="profile-page.php"> <em><u> <?= $_SESSION['player']['username'] ?> </u> </em> </a> </li>			
 			</ul>
 		</nav>
 	</header>
 	
 	<section class="join-main-section"> 
 		
-		<div href="/" class="left-join-section" >
-			<h3> 
-				While we wait for <span class="accent-text"> Senzo </span> 
-				to finish the homepage... 
-			</h3>
+		<div href="/" class="left-join-section">
 
 			<h1 class="join-text"> 
-				Welcome to <br> the 
-				<span class="accent-text"> club. </span>
+				Indulge in your <br> favourite 
+				<span class="accent-text"> games. </span>
 			</h1>
 		
-			<img src="checkers-pink.png" alt="Neon Checkers Board">
+			<img src="console-graphic.png" alt="Neon Checkers Board">
 		</div>
 		
 		
@@ -64,7 +62,7 @@
 		<div class="container">
 			<nav class="footer-nav"> 
 				<ul>
-					<li><a href="#">About Us</a></li>
+					<li><a href="https://github.com/KagisoLesomo/OTP">About Us</a></li>
 					<li><a href="#">Contact</a></li>
 				</ul>
 				Copyright &#169 2023 &#60insert cool group name &#47&#62. All rights reserved.
