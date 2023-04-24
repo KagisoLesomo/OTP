@@ -21,26 +21,24 @@
 		</div>
 		<nav class="main-nav">
 			<ul>
-				<li> <a href="index.html"> Play On </a> </li>		
-				<li> <a href="index.html"> <?= $_SESSION['player']['username'] ?> </a> </li>			
+				<li> <a href="homepage.php"> Play Now </a> </li>
+				<li> <a href="#"> Spectate </a> </li>
+				<li> <a href="prevgames/html.php"> Game History </a> </li>
+				<li> <a href="profile-page.php"> <em><u> <?= $_SESSION['player']['username'] ?> </u> </em> </a> </li>			
 			</ul>
 		</nav>
 	</header>
 	
 	<section class="join-main-section"> 
 		
-		<div href="/" class="left-join-section" >
-			<h3> 
-				While we wait for <span class="accent-text"> Senzo </span> 
-				to finish the homepage... 
-			</h3>
+		<div href="/" class="left-join-section">
 
 			<h1 class="join-text"> 
-				Welcome to <br> the 
-				<span class="accent-text"> club. </span>
+				Indulge in your <br> favourite 
+				<span class="accent-text"> games. </span>
 			</h1>
 		
-			<img src="checkers-pink.png" alt="Neon Checkers Board">
+			<img src="console-graphic.png" alt="Neon Checkers Board">
 		</div>
 		
 		

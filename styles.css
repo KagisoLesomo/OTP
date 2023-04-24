@@ -82,7 +82,10 @@ body {
 }
 
 .main-footer {
+	
+	padding: 10px 10px 0px 10px;
 	bottom: 0;
+	width: 100%;
 	background-color: #031029;
 	font-weight: semi-bold;
 }
@@ -124,4 +127,37 @@ body {
 
 .btn:focus {
 	background-color: #D84C7E;
+
+}
+
+.landing-nav ul{
+	display: flex;
+	margin: 0;
+	margin-right: 10px;
+	margin-bottom: 2rem;
+	padding: 1.1rem;
+	list-style: none;
+	justify-content: center;
+}
+
+.landing-nav a{
+	color: white;
+	background-color: #CD366C;
+	padding: .75rem 1.5rem;
+	border-radius: .5rem;
+	text-decoration: none;
+	font-size: .9rem;
+	border: 2px solid black;
+	border: none;
+	cursor: pointer;
+}
+
+.landing-nav a:hover{
+	background-color: #BB2058;
+}
+
+.btn-signup {
+	border: 2px solid black;
+    	margin-right: 2rem;
+	text-align: center;
 }
