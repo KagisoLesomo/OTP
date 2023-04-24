@@ -21,8 +21,10 @@
 		</div>
 		<nav class="main-nav">
 			<ul>
-				<li> <a href="index.html"> Play On </a> </li>		
-				<li> <a href="profile-page.php"> <?= $_SESSION['player']['username'] ?> </a> </li>			
+				<li> <a href="homepage.php"> Play Now </a> </li>
+				<li> <a href="#"> Spectate </a> </li>
+				<li> <a href="prevgames/html.php"> Game History </a> </li>
+				<li> <a href="profile-page.php"> <em><u> <?= $_SESSION['player']['username'] ?> </u></em> </a> </li>			
 			</ul>
 		</nav>
 	</header>
