@@ -67,7 +67,7 @@ require "mail.php";
 						unset($_SESSION['forgot']);
 					}
 
-					header("Location: login.php");
+					header("Location: login.html");
 					die;
 				}
 				break;
@@ -156,41 +156,59 @@ require "mail.php";
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>Forgot</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="styles.css" rel="stylesheet">
+  <link href="index.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/93116e28c5.js" crossorigin="anonymous"></script>
+  <title> Forgot </title>
 </head>
-<body>
-<style type="text/css">
-	
-	*{
-		font-family: tahoma;
-		font-size: 13px;
-	}
 
-	form{
-		width: 100%;
-		max-width: 200px;
-		margin: auto;
-		border: solid thin #ccc;
-		padding: 10px;
-	}
 
-	.textbox{
-		padding: 5px;
-		width: 180px;
-	}
-</style>
 
-		<?php 
+<body class="full-height-grow">
+	<div class="container full-height-grow">
+	<header class="main-header">
+		<div href="index.html" class="brand-logo" >
+			<img src="logo.png">
+		</div>
+		<nav class="main-nav">
+			<ul>
+				<li> <a href="login.html"> Login </a> </li>				
+			</ul>
+		</nav>
+	</header>
+
+	<section class="join-main-section"> 
+		
+		<div href="/" class="left-join-section" >
+			
+			<img src="padlock.png" alt="Profile Pic :)">
+			<h1> 
+					Follow the prompts to regain <br> access to your <span> </span> realm.
+			</h1>
+			<br>
+			
+		</div>
+		
+		<div class="update-container">
+            <div class="update-aesthetic-image-container">
+				
+			</div>
+			
+			<h1>Forgot Password</h1>
+			<?php 
 
 			switch ($mode) {
 				case 'enter_email':
 					// code...
 					?>
-						<form method="post" action="forgot.php?mode=enter_email"> 
-							<h1>Forgot Password</h1>
-							<h3>Enter your email below</h3>
-							<span style="font-size: 12px;color:red;">
+						<form method="post" class="update-info-container" action="forgot.php?mode=enter_email"> 
+							
+							
+							<span style="font-size: 2rem;color:red;">
 							<?php 
 								foreach ($error as $err) {
 									// code...
@@ -198,10 +216,15 @@ require "mail.php";
 								}
 							?>
 							</span>
-							<input class="textbox" type="email" name="email" placeholder="Email"><br>
-							<br style="clear: both;">
-							<input type="submit" value="Next">
-							<br><br>
+							<div  class="input-group">
+								<label> Enter your email below </label>
+								<input type="email" name="email" placeholder="Email"> 
+							</div>
+					
+							<div class="input-group">
+								<button type="submit" value="" class="btn"> Next </button> 
+							</div>
+							
 							<div><a href="login.html">Login</a></div>
 						</form>
 					<?php				
@@ -210,10 +233,9 @@ require "mail.php";
 				case 'enter_code':
 					// code...
 					?>
-						<form method="post" action="forgot.php?mode=enter_code"> 
-							<h1>Forgot Password</h1>
-							<h3>Enter your the code sent to your email</h3>
-							<span style="font-size: 12px;color:red;">
+						<form method="post"  class="update-info-container" action="forgot.php?mode=enter_code"> 
+							
+							<span style="font-size: 2rem;color:red;">
 							<?php 
 								foreach ($error as $err) {
 									// code...
@@ -222,14 +244,20 @@ require "mail.php";
 							?>
 							</span>
 
-							<input class="textbox" type="text" name="code" placeholder="12345"><br>
-							<br style="clear: both;">
-							<input type="submit" value="Next" style="float: right;">
-							<a href="forgot.php">
-								<input type="button" value="Start Over">
-							</a>
-							<br><br>
-							<div><a href="login.php">Login</a></div>
+							<div  class="input-group">
+								<label> Enter your the code sent to your email </label>
+								<input type="text" name="code" placeholder="12345"> 
+							</div>
+							
+							<div  class="input-group"> 
+								<button type="submit" value="Next" class="btn"> Next </button>
+							</div>
+							
+							<div class="input-group">
+								<button type="button" value="Start Over" class="btn"> <a href="forgot.php"> Start Over </a> </button> 
+							</div>
+							
+							<div><a href="login.html">Login</a></div>
 						</form>
 					<?php
 					break;
@@ -237,10 +265,9 @@ require "mail.php";
 				case 'enter_password':
 					// code...
 					?>
-						<form method="post" action="forgot.php?mode=enter_password"> 
-							<h1>Forgot Password</h1>
-							<h3>Enter your new password</h3>
-							<span style="font-size: 12px;color:red;">
+						<form method="post" class="update-info-container" action="forgot.php?mode=enter_password"> 
+							
+							<span style="font-size: 2rem;color:red;">
 							<?php 
 								foreach ($error as $err) {
 									// code...
@@ -249,15 +276,26 @@ require "mail.php";
 							?>
 							</span>
 
-							<input class="textbox" type="text" name="password" placeholder="Password"><br>
-							<input class="textbox" type="text" name="password2" placeholder="Retype Password"><br>
-							<br style="clear: both;">
-							<input type="submit" value="Next" style="float: right;">
-							<a href="forgot.php">
-								<input type="button" value="Start Over">
-							</a>
-							<br><br>
-							<div><a href="login.php">Login</a></div>
+							<div class="input-group">
+								<label> Enter your new password </label>
+								<input type="text" name="password" placeholder="Password">
+							</div>
+							
+							<div class="input-group">	
+								<input type="text" name="password2" placeholder="Retype Password">
+							</div>
+							
+							<div class="input-group">	
+								<button type="submit" value="Next" class="btn"> Next </button>
+							</div>
+							
+							<div class="input-group">	
+								<a href="forgot.php">
+									<button type="button" class="btn" value="Start Over"> Start Over </button>
+								</a>
+							</div>
+							
+							<div><a href="login.html">Login</a></div>
 						</form>
 					<?php
 					break;
@@ -268,6 +306,29 @@ require "mail.php";
 			}
 
 		?>
+		
+		
+	</section>
+
+	
+	</div>
+		
+	<footer class="main-footer"> 
+		<div class="container">
+			<nav class="footer-nav"> 
+				<ul>
+					<li><a href="#">About Us</a></li>
+					<li><a href="#">Contact</a></li>
+				</ul>
+				Copyright &#169 2023 &#60insert cool group name &#47&#62. All rights reserved.
+			</nav>
+			<nav class="footer-nav"> 
+				<ul>
+					<li> Ayanda | Cwenga | Kagiso | Nqobile | Senzo | Tsholo </li>
+				</ul>
+			</nav>
+		</div>
+	</footer>
 
 
 </body>
