@@ -3,7 +3,7 @@
     "type": "library",
     "license": "MIT",
     "homepage": "https://github.com/kagisolesomo/otp",
-    "description": "Codecov Example PHP",
+    "description": "OTP code cov",
     "keywords": ["code coverage", "codecov", "coverage reports"],
     "authors": [
         {
