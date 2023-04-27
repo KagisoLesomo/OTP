@@ -28,7 +28,7 @@ body , html{
 	margin: 0;
 }
 
-.call-to-action img, {
+.call-to-action img {
 	max-height: 20vh;
 	max-width: 20vw;
 	padding-left: 100px;
@@ -67,6 +67,11 @@ body , html{
 	color: blue;
 }
 
+.input-group a {
+	text-decoration: none;
+	color: white;
+}
+
 .join-form {
 	background-color: #2756B1;
 	width: 50vw;
@@ -74,6 +79,10 @@ body , html{
 	padding: 2rem 4rem;
 	border: 2px solid black;
 	border-radius: 20px;
+}
+
+.join-form a {
+	color:  #E3C3CE;
 }
 
 .update-container {

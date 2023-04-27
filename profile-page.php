@@ -40,16 +40,26 @@
 	<!-- Shows the profile icon and name, you also have the option to update your details & credentials here-->
 	<section class="join-main-section"> 
 		
+		<?php
+			global $conn;
+			$user_id = $_SESSION['player']['id'];
+			$select = mysqli_query($conn, "SELECT * FROM `player` WHERE id = '$user_id'") or die('query failed');
+			if(mysqli_num_rows($select) > 0){
+				$user = mysqli_fetch_assoc($select);
+			}
+		?>
+		
 		<div href="/" class="left-join-section" >
 			<img src="profile-icon.png" alt="Profile Pic :)">
 			
 			<h1> 
-				<?= $_SESSION['player']['username'] ?> <span class="material-icons" style="color: rgb(26, 103, 203);">verified</span><br>
+			<?= htmlspecialchars($user["username"]) ?> <span class="material-icons" style="color: rgb(26, 103, 203);">verified</span><br>
 			</h1>
 			<h3> Certified Grandmaster </h3> 
 			<br>
 		
 			<h3>  Edit info <a href="update-profile.php" ><i class="fa-solid fa-pen-to-square"></i> ... </a></h3>
+			<h3>  Change Password <a href="update-password.php" ><i class="fa-solid fa-pen-to-square"></i> ... </a></h3>
 		</div>
 		
 		<!-- Displays the actual details of the currently logged in user -->
@@ -61,11 +71,11 @@
 			
 			<form class="profile-info-container">
 				<div class="input-group"> 
-					<label> Username:  <span class="profile-accent-text"> <?= $_SESSION['player']['username'] ?> </span> </label>
+					<label> Username:  <span class="profile-accent-text"> <?= htmlspecialchars($user["username"]) ?> </span> </label>
 					
 				</div>
 				<div class="input-group"> 
-					<label> Email: <span class="profile-accent-text"> <?= $_SESSION['player']['email'] ?> </span> </label>
+					<label> Email: <span class="profile-accent-text"> <?= htmlspecialchars($user["email"]) ?> </span> </label>
 					
 				</div>
 				<div class="input-group"> 

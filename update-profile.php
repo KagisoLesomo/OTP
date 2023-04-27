@@ -13,22 +13,7 @@ if(isset($_POST['update_info'])){
 
    mysqli_query($conn, "UPDATE `player` SET username = '$update_name', email = '$update_email' WHERE id = '$user_id'") or die('query failed');
 
-   $old_pass = $_POST['old_pass'];
-   $update_pass = mysqli_real_escape_string($conn, password_hash($_POST['update_pass'], PASSWORD_DEFAULT));
-   $new_pass = mysqli_real_escape_string($conn, password_hash($_POST['new_pass'], PASSWORD_DEFAULT));
-   $confirm_pass = mysqli_real_escape_string($conn, password_hash($_POST['confirm_pass'], PASSWORD_DEFAULT));
-
-   if(!empty($update_pass) || !empty($new_pass) || !empty($confirm_pass)){
-      if(!password_verify($_POST['update_pass'], $old_pass)){
-         $message[] = 'old password not matched!';
-      }elseif(trim($_POST['new_pass']) != trim($_POST['confirm_pass'])){
-         $message[] = 'confirm password not matched!';
-      }else{
-         mysqli_query($conn, "UPDATE `player` SET password = '$confirm_pass' WHERE id = '$user_id'") or die('query failed');
-         $message[] = 'password updated successfully!';
-		 header("Location: profile-page.php");
-      }
-   }
+   header("Location: profile-page.php");
    
 }
 
@@ -109,19 +94,6 @@ if(isset($_POST['update_info'])){
 					<label> Email: </label>
 					<input type="text" id="email" value="<?= htmlspecialchars($user["email"]) ?>" name="email">
 				</div>
-				<div class="input-group">
-					<input type="hidden" name="old_pass" value="<?php echo $user['password']; ?>">				
-					<label> Current Password: </label>
-					<input type="password" id="password" value="" name="update_pass">
-				</div>
-				<div class="input-group"> 
-					<label> New Password: </label>
-					<input type="password" id="new_password" value="" name="new_pass">
-				</div>
-				<div class="input-group"> 
-					<label> Confirm New Password: </label>
-					<input type="password" id="confirm_password" value="" name="confirm_pass">
-				</div>
 				<div class="input-group"> 
 					<button type="submit" class="btn" name="update_info"> Update info </button>
 				</div>
@@ -150,5 +122,13 @@ if(isset($_POST['update_info'])){
 			</nav>
 		</div>
 	</footer>
+
+
+	<script>
+function myFunction() {
+  alert("I am an alert box!");
+}
+</script>
+
 </body>
 </html>

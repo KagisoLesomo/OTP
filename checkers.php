@@ -1,5 +1,11 @@
 <?php 
-	require_once("functions.php")
+	require_once("functions.php");
+
+	$id = $_SESSION['player']['id'];
+
+	$result = db_select('player', "id = {$id}");
+
+	$_SESSION['player'] = $result[0];
 ?>
 
 <!DOCTYPE html>
@@ -23,7 +29,7 @@
 	<div class="score" id="score"><br></div>
 
 	<?php 
-if($_SESSION['opponent']['gameColor'] == "red" || $_SESSION["player"]["gameColor"] == "blue") { 
+if($_SESSION["player"]["gameColor"] == "blue") { 
 	?>
 	<div class="label"><?= $_SESSION['opponent']['username'] ?></div>
 <?php } else { ?>
@@ -142,7 +148,7 @@ if($_SESSION['opponent']['gameColor'] == "red" || $_SESSION["player"]["gameColor
 
 <?php 
 
-if($_SESSION["player"]["gameColor"] == "red" || $_SESSION['opponent']['gameColor'] == "blue") { ?>
+if($_SESSION["player"]["gameColor"] == "red") { ?>
 	<div class="label"><?= $_SESSION['opponent']['username'] ?></div>
 <?php } else { ?>
 	<div class="label"><?= $_SESSION['player']['username'] ?></div>

@@ -10,6 +10,8 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link href="styles.css" rel="stylesheet">
   <link href="index.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/93116e28c5.js" crossorigin="anonymous"></script>
   <title>insert cool group name - homepage </title>
 </head>
 
@@ -60,7 +62,7 @@
 		<div class="container">
 			<nav class="footer-nav"> 
 				<ul>
-					<li><a href="#">About Us</a></li>
+					<li><a href="https://github.com/KagisoLesomo/OTP">About Us</a></li>
 					<li><a href="#">Contact</a></li>
 				</ul>
 				Copyright &#169 2023 &#60insert cool group name &#47&#62. All rights reserved.
