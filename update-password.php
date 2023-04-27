@@ -4,7 +4,7 @@ session_start();
 $user_id = $_SESSION['player']['id'];
 
    global $conn;
-   $conn = mysqli_connect('localhost','root','','checkers');
+   $conn = mysqli_connect('localhost','root','','otp');
    
 if(isset($_POST['update_info'])){
 
@@ -58,7 +58,7 @@ if(isset($_POST['update_info'])){
 		</div>
 		<nav class="main-nav">
 			<ul>
-				<li> <a href="moregames.html"> Play Now </a> </li>
+				<li> <a href="homepage.php"> Play Now </a> </li>
 				<li> <a href="#"> Spectate </a> </li>
 				<li> <a href="#"> Game History </a> </li>
 				<li> <a href="logout.php"> Logout <i class="fa-solid fa-right-from-bracket"></i> </a> </li>				

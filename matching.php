@@ -4,6 +4,7 @@ ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 
+
 sleep(10);
 
 require_once("functions.php");
@@ -43,4 +44,4 @@ if (count($result) != 0) {
 }
 
 db_update('player', ["checkers" => 0], "id={$id}");
-header("Location: homepage.php");
+header("Location: noMatch.php");

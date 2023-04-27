@@ -4,7 +4,7 @@ $error = array();
 
 require "mail.php";
 
-	if(!$con = mysqli_connect("localhost","root","","checkers")){
+	if(!$con = mysqli_connect("localhost","root","","otp")){
 
 		die("could not connect");
 	}
