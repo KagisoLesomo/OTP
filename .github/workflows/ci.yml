@@ -12,8 +12,8 @@ jobs:
           php-version: '8.1'
       - name: Install dependencies
         run: composer self-update && composer install && composer dump-autoload
-#       - name: Run tests and collect coverage
-#         run: vendor/bin/phpunit --coverage-clover coverage.xml .
+      - name: Run tests and collect coverage
+        run: vendor/bin/phpunit --coverage-clover coverage.xml OTP
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
 
