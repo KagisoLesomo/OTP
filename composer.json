@@ -23,7 +23,11 @@
             "logout.php",
              "mail.php",
              "prevgames/html.php",
-             "prevgames/database.php"
+             "prevgames/database.php",
+             "prevgames/getgame.php",
+             "functions.php",
+             "forgot.php",
+             "homepage.php"
         ]
     }
 }
