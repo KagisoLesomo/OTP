@@ -4,7 +4,7 @@ session_start();
 $user_id = $_SESSION['player']['id'];
 
    global $conn;
-   $conn = mysqli_connect('localhost','root','','checkers');
+   $conn = mysqli_connect('localhost','root','','otp');
    
 if(isset($_POST['update_info'])){
 	
