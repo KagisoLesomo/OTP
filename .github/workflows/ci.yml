@@ -16,4 +16,3 @@ jobs:
         run: vendor/bin/phpunit --coverage-clover coverage.xml OTP
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
-
