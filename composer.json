@@ -2,7 +2,7 @@
     "name": "kagisolesomo/otp",
     "type": "library",
     "license": "MIT",
-    "homepage": "https://github.com/codecov/codecov-php",
+    "homepage": "https://github.com/kagisolesomo/otp",
     "description": "Codecov Example PHP",
     "keywords": ["code coverage", "codecov", "coverage reports"],
     "authors": [
