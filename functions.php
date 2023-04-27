@@ -8,7 +8,7 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-$conn = new mysqli('localhost', 'root', '', 'checkers');
+// $conn = new mysqli('localhost', 'root', '', 'checkers');
 
 function db_select($table, $condition = null)
 {
