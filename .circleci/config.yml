@@ -13,8 +13,9 @@ jobs:
       - browser-tools/install-browser-tools
       - run:
           name: "Run tests"
-          command: ./vendor/bin/phpunit --coverage-clover build/coverage-report
+          command: docker run vendor/bin/phpunit --coverage-clover build/coverage-report
           environment:
             XDEBUG_MODE: coverage
       - store_artifacts:
           path:  build/coverage-report
+# docker run --rm -v $(pwd):/app jitesoft/phpunit --configuration phpunit.xml
