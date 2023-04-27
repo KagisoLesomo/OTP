@@ -81,7 +81,8 @@ require "mail.php";
 	function send_email($email){
 		
 		global $con;
-
+		
+		//Time until code expires: 5min
 		$expire = time() + (60 * 5);
 		$code = rand(10000,99999);
 		$email = addslashes($email);
