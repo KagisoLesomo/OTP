@@ -13,7 +13,7 @@ jobs:
       - browser-tools/install-browser-tools
       - run:
           name: "Run tests"
-          command: phpdbg -qrr vendor/bin/phpunit --coverage-html build/coverage-report
+          command: phpdbg -qrr vendor/bin/phpunit --coverage-clover build/coverage-report
           environment:
             XDEBUG_MODE: coverage
       - store_artifacts:
