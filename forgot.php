@@ -5,7 +5,8 @@ $error = array();
 require "mail.php";
 
 	if(!$con = mysqli_connect("localhost","root","","checkers")){
-
+		
+		//if can't connect to server
 		die("could not connect");
 	}
 
@@ -66,7 +67,8 @@ require "mail.php";
 					if(isset($_SESSION['forgot'])){
 						unset($_SESSION['forgot']);
 					}
-
+					
+					//if all successful, sends you back to login screen
 					header("Location: login.html");
 					die;
 				}
@@ -93,7 +95,8 @@ require "mail.php";
 		//send email here
 		send_mail($email,'OTP: Password Reset',"Your password reset code is " . $code);
 	}
-	
+
+	//sets password to database
 	function save_password($password){
 		
 		global $con;
@@ -101,11 +104,13 @@ require "mail.php";
 		$password = password_hash($password, PASSWORD_DEFAULT);
 		$email = addslashes($_SESSION['forgot']['email']);
 
+		//updates 'player' table with new password
 		$query = "update player set password = '$password' where email = '$email' limit 1";
 		mysqli_query($con,$query);
 
 	}
 	
+	//Checks for valid email
 	function valid_email($email){
 		global $con;
 
@@ -130,15 +135,15 @@ require "mail.php";
 		$code = addslashes($code);
 		$expire = time();
 		$email = addslashes($_SESSION['forgot']['email']);
-
+		
 		$query = "select * from codes where code = '$code' && email = '$email' order by id desc limit 1";
 		$result = mysqli_query($con,$query);
+		//verifies code
 		if($result){
 			if(mysqli_num_rows($result) > 0)
 			{
 				$row = mysqli_fetch_assoc($result);
 				if($row['expire'] > $expire){
-
 					return "The code is correct";
 				}else{
 					return "The code has expired";
