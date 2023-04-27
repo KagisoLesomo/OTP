@@ -16,10 +16,11 @@ if ($password != $confirm) {
 }
 
 if ($res->num_rows != 0) {
-    header("Location: index.html");
+    header("Location: signup.html");
     die();
 }
 
+//encrypts password
 $password = password_hash($password,PASSWORD_DEFAULT);
 
 $sql = "INSERT INTO player (
@@ -33,9 +34,10 @@ $sql = "INSERT INTO player (
 )";
 
 if($conn->query($sql)) {
+    //If sign-up successfull, moves user to log-in page
     header("Location: login.html");
 } else {
-    header("Location: index.html");
+    header("Location: signup.html");
 }
 die();
 ?>
