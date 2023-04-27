@@ -8,7 +8,7 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-$conn = new mysqli('10.100.15.95', 'popo', 'Popovich@69', 'otp');
+$conn = new mysqli('localhost', 'root', '', 'checkers');
 
 function db_select($table, $condition = null)
 {
