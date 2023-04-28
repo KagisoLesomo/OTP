@@ -55,6 +55,7 @@ jobs:
       - run:
           name: Phpunit tests
           command: |
+          composer dump-autoload &&
             ./vendor/bin/phpunit --log-junit test-results/phpunit/junit.xml
       - store_test_results:
           path: test-results
