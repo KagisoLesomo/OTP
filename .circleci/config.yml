@@ -49,7 +49,7 @@ jobs:
       - run:
           name: View PHP environment
           command: |
-            php -v && php composer.phar update &&
+            php -v && 
             composer --version &&
             ./vendor/bin/phpunit --version 
       - run:
