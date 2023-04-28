@@ -49,7 +49,7 @@ jobs:
       - run:
           name: View PHP environment
           command: |
-            php -v &&  composer global update
+            php -v &&  composer global update && composer init
             composer --version &&
             ./vendor/bin/phpunit --version 
       - run:
