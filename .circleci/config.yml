@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  php: circleci/php@8.2.5
+  php: circleci/php@1.1.0
 workflows:
   build_and_test:
     jobs:
@@ -9,7 +9,7 @@ workflows:
 jobs:
   build_and_test:
     docker:
-      - image: circleci/php:7.4.9-cli-buster
+      - image: cimg/php:8.2.5
     steps:
       - checkout
       - run: |
