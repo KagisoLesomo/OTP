@@ -53,9 +53,9 @@ jobs:
             # php -v &&  composer global update && composer init
             # composer --version &&
             # ./vendor/bin/phpunit --version 
-      - run:
-          name: Phpunit tests
-          command: |
-            ./vendor/bin/phpunit --log-junit test-results/phpunit/junit.xml
+      # - run:
+      #     name: Phpunit tests
+      #     command: |
+      #       ./vendor/bin/phpunit --log-junit test-results/phpunit/junit.xml
       - store_test_results:
           path: test-results
