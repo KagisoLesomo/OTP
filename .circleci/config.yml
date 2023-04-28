@@ -49,9 +49,9 @@ jobs:
       - run:
           name: View PHP environment
           command: |
-            php -v &&
+            php -v && php composer.phar update &&
             composer --version &&
-            ./vendor/bin/phpunit --version
+            ./vendor/bin/phpunit --version 
       - run:
           name: Phpunit tests
           command: |
