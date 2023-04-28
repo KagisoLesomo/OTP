@@ -22,7 +22,7 @@ background-color :#8c1394;
 clear: both;
 }
 
-.end {
+.endGame {
     text-align: center;
     
     padding-top: 10px;
@@ -73,6 +73,31 @@ font-family: Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif;
 -moz-transition: 5s ease-in-out;
 -o-transition: 5s ease-in-out;
 transition: 5s ease-in-out;
+}
+.end{
+    background-color: #1aaaad;
+    color: white;
+    display: none;
+    font-size: 15px;
+    font-weight: 900;
+    height:150px;
+    border-radius: 10%;
+    left: 0px;
+    letter-spacing: 1px;
+    margin : 0 auto;
+    padding-top: 30px;
+    overflow: hidden;
+    position: absolute;
+    right: 0px;
+    text-align: center;
+    top: 15%;
+    width: 200px;
+    z-index: 8;
+    font-family: Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif;
+     -webkit-transition: 5s ease-in-out;
+    -moz-transition: 5s ease-in-out;
+    -o-transition: 5s ease-in-out;
+    transition: 5s ease-in-out;
 }
 
 .checker{

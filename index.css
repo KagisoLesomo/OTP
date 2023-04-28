@@ -67,6 +67,11 @@ body , html{
 	color: blue;
 }
 
+.input-group a {
+	text-decoration: none;
+	color: white;
+}
+
 .join-form {
 	background-color: #2756B1;
 	width: 50vw;
@@ -78,7 +83,6 @@ body , html{
 
 .join-form a {
 	color:  #E3C3CE;
-	margin-bottom: 1rem;
 }
 
 .update-container {

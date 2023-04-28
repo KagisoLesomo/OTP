@@ -1,5 +1,5 @@
 <?php
-include("getgame.php");
+require_once("getgame.php");
 ?>
 <!DOCTYPE html>
 <html>

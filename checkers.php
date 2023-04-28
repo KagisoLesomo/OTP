@@ -1,5 +1,11 @@
 <?php 
-	require_once("functions.php")
+	require_once("functions.php");
+
+	$id = $_SESSION['player']['id'];
+
+	$result = db_select('player', "id = {$id}");
+
+	$_SESSION['player'] = $result[0];
 ?>
 
 <!DOCTYPE html>
@@ -21,9 +27,10 @@
 <div class="black_background" id="black_background"> </div>
 
 	<div class="score" id="score"><br></div>
+	<div class="end" id="end">The opponent left my G <a href="homepage.php"><br><br> Leave too</a></div>
 
 	<?php 
-if($_SESSION['opponent']['gameColor'] == "red" || $_SESSION["player"]["gameColor"] == "blue") { 
+if($_SESSION["player"]["gameColor"] == "blue") { 
 	?>
 	<div class="label"><?= $_SESSION['opponent']['username'] ?></div>
 <?php } else { ?>
@@ -142,13 +149,13 @@ if($_SESSION['opponent']['gameColor'] == "red" || $_SESSION["player"]["gameColor
 
 <?php 
 
-if($_SESSION["player"]["gameColor"] == "red" || $_SESSION['opponent']['gameColor'] == "blue") { ?>
+if($_SESSION["player"]["gameColor"] == "red") { ?>
 	<div class="label"><?= $_SESSION['opponent']['username'] ?></div>
 <?php } else { ?>
 	<div class="label"><?= $_SESSION['player']['username'] ?></div>
 <?php } ?>
 
-<div class="end"><a href="endGame.php">End Game</a></div>
+<div class="endGame"><a href="endGame.php">End Game</a></div>
 
 <audio id="moveSound">
 	<source src = "sounds/move.mp3"> 
@@ -156,6 +163,10 @@ if($_SESSION["player"]["gameColor"] == "red" || $_SESSION['opponent']['gameColor
 
 <audio id="winSound">
 	<source src="sounds/win.mp3">
+</audio>
+
+<audio id="endSound">
+	<source src="sounds/start.mp3">
 </audio>
 
 <script src="script.js" > </script>

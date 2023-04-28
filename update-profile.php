@@ -11,6 +11,7 @@ if(isset($_POST['update_info'])){
    $update_name = mysqli_real_escape_string($conn, $_POST['username']);
    $update_email = mysqli_real_escape_string($conn, $_POST['email']);
 
+   //updates database with new username and email
    mysqli_query($conn, "UPDATE `player` SET username = '$update_name', email = '$update_email' WHERE id = '$user_id'") or die('query failed');
 
    header("Location: profile-page.php");
@@ -40,7 +41,7 @@ if(isset($_POST['update_info'])){
 		</div>
 		<nav class="main-nav">
 			<ul>
-				<li> <a href="moregames.html"> Play Now </a> </li>
+				<li> <a href="homepage.php"> Play Now </a> </li>
 				<li> <a href="#"> Spectate </a> </li>
 				<li> <a href="#"> Game History </a> </li>
 				<li> <a href="logout.php"> Logout <i class="fa-solid fa-right-from-bracket"></i> </a> </li>				

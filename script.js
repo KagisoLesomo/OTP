@@ -5,6 +5,8 @@ var side;
 var opponent = false;
 var indy;
 
+var game = 1;
+
 var w_prev = 0;
 var b_prev = 0;
 
@@ -18,10 +20,12 @@ var black_checker_class = document.getElementsByClassName("black_checker");
 
 var table = document.getElementById("table");
 var score = document.getElementById("score");
+var end = document.getElementById("end");
 
 var black_background = document.getElementById("black_background");
 var moveSound = document.getElementById("moveSound");
 var winSound = document.getElementById("winSound");
+var endSound = document.getElementById("endSound");
 
 var windowHeight = window.innerHeight
 				|| document.documentElement.clientHeight
@@ -214,6 +218,21 @@ function checkTurn() {
 	xhr.send();
 }
 
+function checkOpp() {
+	var xhr = new XMLHttpRequest();
+
+	xhr.open('GET', 'getSide.php', false);
+
+	xhr.onload = function() {
+		if (this.status == 200) {
+			info = JSON.parse(this.responseText);
+	
+			game = info[0].checkers;
+		}
+	}
+	xhr.send();
+}
+
 function fetchOpMove() {
 	var xhr = new XMLHttpRequest();
 
@@ -355,6 +374,13 @@ function fetchAttack() {
 	
 function checkState() {
 	checkTurn();
+	checkOpp();
+
+	console.log(game);
+
+	if (game == 0) {
+		declareEnd();
+	}
 		
 		if (turn == "white"){
 			the_checker = w_checker;
@@ -508,7 +534,7 @@ function getDownRightL() {
 	xhr.send();
 }
 
-setInterval(checkState, 1000);
+var intervaling = setInterval(checkState, 1000);
 
 function showMoves(piece) {
 	
@@ -1162,6 +1188,14 @@ if(the_checker[1].color == "white")
 	score.innerHTML = "Blue wins";
 else
 	score.innerHTML = "Red wins";
+}
+
+function declareEnd(){
+	playSound(endSound);
+	black_background.style.display = "inline";
+	end.style.display = "block";
+
+	clearInterval(intervaling);
 }
 
 function playSound(sound){
