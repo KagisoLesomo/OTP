@@ -7,7 +7,7 @@ $password=trim($_POST['password']);
 function trimUsername(){
     return trim($_POST['username']);
 }
-$username = trimUsername()
+$username = trimUsername();
 
 if (login_user($username, $password)) {
     header("Location: homepage.php");
