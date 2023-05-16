@@ -50,9 +50,9 @@ jobs:
           name: View PHP environment
           command: |
            composer dump-autoload
-            # php -v &&  composer global update && composer init
-            # composer --version &&
-            # ./vendor/bin/phpunit --version 
+            php -v &&  composer global update && composer init
+            composer --version &&
+            ./vendor/bin/phpunit --version 
       # - run:
       #     name: Phpunit tests
       #     command: |
