@@ -34,13 +34,13 @@ jobs:
             sudo docker-php-ext-install -j$(nproc) gmp gd && \
             sudo docker-php-ext-enable mcrypt
             ls -al  /usr/local/include/php/
-      - run:
-          name: Copying extensions to temp directory for cache
-          command: sudo cp -R /usr/local/lib/php/extensions/no-debug-non-zts-20190902/* ./php-ext-cache/
-      - save_cache:
-          key: extensions-v1-{{ checksum ".circleci/scripts/install-php-extensions.sh" }}
-          paths:
-            - ./php-ext-cache/
+      # - run:
+      #     name: Copying extensions to temp directory for cache
+      #     command: sudo cp -R /usr/local/lib/php/extensions/no-debug-non-zts-20190902/* ./php-ext-cache/
+      # - save_cache:
+      #     key: extensions-v1-{{ checksum ".circleci/scripts/install-php-extensions.sh" }}
+      #     paths:
+      #       - ./php-ext-cache/
 
       - php/install-composer:
           install-version: 2.1.0
@@ -50,9 +50,9 @@ jobs:
           name: View PHP environment
           command: |
            composer dump-autoload
-            # php -v &&  composer global update && composer init
-            # composer --version &&
-            # ./vendor/bin/phpunit --version 
+            php -v &&  composer global update && composer init
+            composer --version &&
+            ./vendor/bin/phpunit --version 
       # - run:
       #     name: Phpunit tests
       #     command: |
