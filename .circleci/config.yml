@@ -37,10 +37,10 @@ jobs:
       # - run:
       #     name: Copying extensions to temp directory for cache
       #     command: sudo cp -R /usr/local/lib/php/extensions/no-debug-non-zts-20190902/* ./php-ext-cache/
-      # - save_cache:
-      #     key: extensions-v1-{{ checksum ".circleci/scripts/install-php-extensions.sh" }}
-      #     paths:
-      #       - ./php-ext-cache/
+      - save_cache:
+          key: extensions-v1-{{ checksum ".circleci/scripts/install-php-extensions.sh" }}
+          paths:
+            - ./php-ext-cache/
 
       - php/install-composer:
           install-version: 2.1.0
