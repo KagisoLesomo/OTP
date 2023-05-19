@@ -50,8 +50,7 @@ jobs:
           name: View PHP environment
           command: |
             php -v &&  
-            composer --version &&
-            ./vendor/bin/phpunit --version 
+            composer --version
       # - run:
           # name: Phpunit tests
         #   command: |
