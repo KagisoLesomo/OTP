@@ -46,16 +46,15 @@ jobs:
           install-version: 2.1.0
       - php/install-packages
 
-      # - run:
-      #     name: View PHP environment
-      #     command: |
-      #      composer dump-autoload
-      #       php -v &&  composer global update && composer init
-      #       composer --version &&
-      #       ./vendor/bin/phpunit --version 
       - run:
-          name: Phpunit tests
+          name: View PHP environment
           command: |
-            ./vendor/bin/phpunit tests --log-junit test-results/phpunit/junit.xml
+            php -v &&  
+            composer --version &&
+            ./vendor/bin/phpunit --version 
+      # - run:
+          # name: Phpunit tests
+        #   command: |
+        # ./vendor/bin/phpunit tests --log-junit test-results/phpunit/junit.xml
       - store_test_results:
           path: test-results
