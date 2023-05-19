@@ -4,7 +4,7 @@ class GameManager {
      * @param {number} player Player's checkers, default value is 2
      * @param {number} AIplayer Which one (black or white) checkers the AI will be playing, default value is 1
      */
-    constructor(player = 0, AIplayer = 0) {
+    constructor(player = 2, AIplayer = 1) {
         // Game board
         this.gameBoard = new Board();
         // Draw manager
@@ -60,7 +60,7 @@ class GameManager {
 
             if (inRange) {
                 gameManager.drawManager.RemoveMovedTilesHighlight();
-                true
+
                 // To check if we can do more than one jump
                 if (inRange === 2) {
                     if (checker.Attack(tile)) {

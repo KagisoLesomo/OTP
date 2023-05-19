@@ -9,8 +9,9 @@ html, body {
 }
 
 body {
-    background-image: url("../images/background.png"), linear-gradient(180deg, rgb(12, 52, 83), rgb(8, 32, 45));
+    background-image: url("../images/background.png"),  linear-gradient(180deg, rgb(12, 52, 83), rgb(8, 32, 45));
 }
+
 
 .column {
     height: 100%;
@@ -21,19 +22,48 @@ body {
     justify-content: center;
 }
 
-.endGame {
-    text-align: left;
-}
-
 #menu {
     height: 85%;
     width: 100%;
     margin: 5em;
-    background: rgb(157, 26, 190);
+    background: rgb(25, 123, 165);
     border-radius: 1em;
     display: flex;
     flex-flow: column;
     padding: 1em;
+}
+
+.buttons button:nth-child(odd) {
+    margin-right: 0.5em;
+}
+
+#menu button {
+    width: 100%;
+    border: none;
+    font-size: 1.25em;
+    padding: 1em;
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+    flex-flow: row;
+}
+
+#menu button:hover {
+    cursor: pointer;
+    background: #cacaca;
+    transition-duration: 0.3s;
+}
+
+#menu button:focus {
+    outline: 0;
+}
+
+#menu button:active {
+    outline: 0;
+    background: #929292;
+    transition-duration: 0.3s;
 }
 
 #menu h1 {
@@ -64,7 +94,7 @@ body {
     width: 100%;
     margin: 1em 0 1em 0;
     height: 75%;
-    background: rgb(224, 184, 209);
+    background: white;
 }
 
 #board {
@@ -77,7 +107,7 @@ body {
 }
 
 #menu, .tiles {
-    box-shadow: 0 0 1em 0.25em rgba(46, 14, 226, 0.75);
+    box-shadow: 0 0 1em 0.25em rgba(121, 121, 121, 0.75);
 }
 
 .tiles {
@@ -87,7 +117,7 @@ body {
     display: flex;
     flex-direction: column;
     border-radius: 1em;
-    border: rgb(157, 26, 190) 0.65em solid;
+    border: rgb(221, 221, 221) 0.65em solid;
 }
 
 .tileRow {
@@ -96,19 +126,19 @@ body {
 }
 
 .tileRow:nth-child(odd) .tile:nth-child(odd) {
-    background-color: #f39fda;
+    background-color: #EDEDED;
 }
 
 .tileRow:nth-child(even) .tile:nth-child(even) {
-    background-color: #f39fda;
+    background-color: #EDEDED;
 }
 
 .tileRow:nth-child(even) .tile:nth-child(odd) {
-    background-color: #8301fd;
+    background-color: #383838;
 }
 
 .tileRow:nth-child(odd) .tile:nth-child(even) {
-    background-color: #8301fd;
+    background-color: #383838;
 }
 
 .tileRow, .tile {
@@ -168,7 +198,7 @@ body {
 }
 
 .black {
-    background: radial-gradient(circle, rgb(255, 0, 0), rgb(46, 46, 46));
+    background: radial-gradient(circle, rgb(0, 0, 0), rgb(46, 46, 46));
     box-shadow: inset 0 0 0 0.4em #5a5a5a;
 }
 
@@ -183,7 +213,7 @@ body {
 }
 
 .white {
-    background: radial-gradient(circle, rgb(6, 10, 236), rgb(255, 255, 255));
+    background: radial-gradient(circle, rgb(214, 214, 214), rgb(255, 255, 255));
     box-shadow: inset 0 0 0 0.4em rgb(182, 182, 182);
 }
 
@@ -275,4 +305,10 @@ body {
 .beenhereallalong {
     box-shadow: inset 0 0 0.75em 0.25em red;
     transition-duration: 0.3s;
+}
+
+@media (max-width: 1500px) {
+    .column {
+        display: none;
+    }
 }
