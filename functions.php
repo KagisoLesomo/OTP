@@ -8,7 +8,8 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-$conn = new mysqli('localhost', 'root', '', 'otp');
+$conn = new mysqli('localhost', 'root', '', 'otp'); 
+
 
 function db_select($table, $condition = null)
 {
@@ -131,6 +132,13 @@ function login_user($username, $password)
     }
 
     $_SESSION['player'] = $row;
+
+
+    //Adds online status i.e. adds user info to 'online' table
+    $sql = "DELETE FROM online WHERE plrid = ".$_SESSION['player']['id'];
+	$res = $conn->query($sql);
+	$sql = "INSERT INTO online(`plrid`, `plrname`) VALUES (".$_SESSION['player']['id'].",'".$_SESSION['player']['username']."')";
+	$res = $conn->query($sql);
 
     return true;
 }

@@ -17,14 +17,14 @@ require_once("getgame.php");
 <body class="full-height-grow">
 	<div class="container full-height-grow">
 	<header class="main-header">
-		<div href="index.html" class="brand-logo" >
-		<a href="/homepage.php"> <img src="logo.png"> </a>
+		<div href="../index.html" class="brand-logo" >
+		<a href="../homepage.php"> <img src="logo.png"> </a>
 		</div>
 		<nav class="main-nav">
 			<ul>
-				<li> <a href="/homepage.php"> Play Now </a> </li>
+				<li> <a href="../homepage.php"> Play Now </a> </li>
 				<li> <a href="#"> Spectate </a> </li>
-				<li> <a href="/logout.php"> Logout <i class="fa-solid fa-right-from-bracket"></i> </a> </li>				
+				<li> <a href="../logout.php"> Logout <i class="fa-solid fa-right-from-bracket"></i> </a> </li>				
 			</ul>
 		</nav>
 	</header>
@@ -35,11 +35,11 @@ require_once("getgame.php");
 			
 			<h1> Here you can view a record of all the games  you've completed to this point! </h1>
 			
-			<img src="/player-info.png" alt="Profile Pic :)">
+			<img src="../player-info.png" alt="Profile Pic :)">
 			
 			<br>
 		
-			<h3>  Go back <a href="/homepage.php" > <i class="fa-solid fa-left-from-line"></i>... </a></h3>
+			<h3>  Go back <a href="../homepage.php" > <i class="fa-solid fa-left-from-line"></i>... </a></h3>
 		
 			
 			
@@ -59,10 +59,10 @@ require_once("getgame.php");
 							<table class="table table-bordered">
 								<thead><tr><th>S.N</th>
 								
+								<th>Game ID</th>
 								<th>Player</th>		
 								<th>Opponent</th>
-								<th>Won?</th>
-								<th>Game ID</th>
+								<th>Time</th>
 								<th>Date</th>
 								</thead>
 							<tbody>
@@ -73,10 +73,10 @@ require_once("getgame.php");
 						?>
 							<tr>
 							<td><?php echo $sn; ?></td>
-							<td><?php echo $data['playerid']??''; ?></td>
-							<td><?php echo $data['opponentid']??''; ?></td>
-							<td><?php echo $data['won']??''; ?></td>
-							<td><?php echo $data['gameid']??''; ?></td>
+							<td><?php echo $data['gameId']??''; ?></td>
+							<td><?php echo $data['player1']??''; ?></td>
+							<td><?php echo $data['player2']??''; ?></td>
+							<td><?php echo $data['time']??''; ?></td>
 							<td><?php echo $data['date']??''; ?></td>
 							</tr>
 						<?php
