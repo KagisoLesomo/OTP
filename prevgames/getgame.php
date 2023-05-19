@@ -2,8 +2,8 @@
 require_once("database.php");
 
 $db= $conn;
-$tableName="checkers";
-$columns= ['gameId', 'player1', 'player2', 'time','date'];
+$tableName="games";
+$columns= ['playerId', 'opponentid','won','gameid','date'];
 $fetchData = fetch_data($db, $tableName, $columns);
 
 function fetch_data($db, $tableName, $columns){

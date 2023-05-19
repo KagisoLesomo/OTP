@@ -1,4 +1,4 @@
-// Class used t odraw the board and checkers
+// Class used to draw the board and checkers
 class DrawManger {
     /**
      * @param {Board} board Board to draw
