@@ -6,6 +6,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <link rel="shortcut icon" type="image/png" href="favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link href="styles.css" rel="stylesheet">
@@ -25,7 +26,7 @@
 			<ul>
 				<li> <a href="homepage.php"> Play Now </a> </li>
 				<li> <a href="#"> Spectate </a> </li>
-				<li> <a href="prevgames/html.php"> Game History </a> </li>
+				<li> <a href="GameHist.php"> Game History </a> </li>
 				<li> <a href="profile-page.php"> <em><u> <?= $_SESSION['player']['username'] ?> </u> </em> </a> </li>			
 			</ul>
 		</nav>
@@ -46,10 +47,10 @@
 		
 		<form class="join-form">
 			<div class="input-group"> 
-				<a type="button" class="btn" href="enterGame.php">Checkers</a>
+				<a type="button" class="btn" href="Matching/enterGame.php">Checkers</a>
 			</div>
 			<div class="input-group"> 
-				<a type="button" class="btn" href="moregames.html">Another One</a>
+				<a type="button" class="btn" href="TicTacToe/online.php">Tic Tac Toe</a>
 			</div>
 			<div class="input-group"> 
 				<a type="button" class="btn" href="moregames.html">The Last One</a>
