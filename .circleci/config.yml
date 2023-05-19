@@ -46,5 +46,14 @@ jobs:
           install-version: 2.1.0
       - php/install-packages
 
+      # - run:
+      #     name: View PHP environment
+      #     command: |
+      #       php -v &&  
+      #       composer --version
+      # - run:
+          # name: Phpunit tests
+        #   command: |
+        # ./vendor/bin/phpunit tests --log-junit test-results/phpunit/junit.xml
       - store_test_results:
           path: test-results
