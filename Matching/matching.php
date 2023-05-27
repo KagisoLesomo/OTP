@@ -22,7 +22,8 @@ if (count($result) != 0) {
             $res = db_select('player', "id = {$id} && gameId = {$_SESSION['opponent']['gameId']}");
         
             if ($res[0]['id'] != null){
-                header("Location: ../Checkers/index.html");
+                $_SESSION['player']['gameId'] = $_SESSION['opponent']['gameId'];
+                header("Location: ../Checkers/index.php");
                 die();
             }
         }else {
@@ -33,12 +34,14 @@ if (count($result) != 0) {
     if ($_SESSION['opponent'] != null && $_SESSION['opponent']['gameId'] == 0) {
         $token = rand(10000, 10000000);
 
-        db_update('player', ['gameId' => $token], "id = {$id}");
-        db_update('player', ['gameId' => $token], "id = {$_SESSION['opponent']['id']}");
+        db_update('player', ['gameId' => $token, 'player' => 2], "id = {$id}");
+        db_update('player', ['gameId' => $token, 'player' => 1], "id = {$_SESSION['opponent']['id']}");
 
-        db_insert('checkers', ['player1' => $id, 'player2' => $_SESSION['opponent']['id'], 'time' => date("h:i:sa"), 'date' => date("Y/m/d")]);
+        db_insert('checkers', ['player1' => $id, 'player2' => $_SESSION['opponent']['id'], 'gameId' => $token, 'time' => date("h:i:sa"), 'date' => date("Y/m/d")]);
+        
+        $_SESSION['player']['gameId'] = $token;
 
-        header("Location: ../Checkers/index.html");
+        header("Location: ../Checkers/index.php");
         die();
     }
 }
