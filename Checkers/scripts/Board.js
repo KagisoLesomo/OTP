@@ -5,9 +5,9 @@ class Board {
         this.boardSize = 10;
         // Initialize new matrix
         this.board = this.Initialize();
-        // Place checkers for 1st player
-        this.PlaceCheckers(1, 0, Math.floor(this.boardSize / 2) - 1);
-        // Place checkers for 2nd player
+        // Place checkers for 1st player on top of the board
+        this.PlaceCheckers(1, 0, Math.floor(this.boardSize / 2) - 1);  
+        // Place checkers for 2nd player on botton of the board
         this.PlaceCheckers(2, this.boardSize - (Math.floor(this.boardSize / 2) - 1), this.boardSize);
         this.tiles = [];
         this.checkers = [];
@@ -120,11 +120,11 @@ class Board {
 
                 if (inRange) {
                     if (inRange === 1) {
-                        if (checker.player === 1 && !checker.king) {
+                        if (checker.player === 1 && !checker.king) {            // to ensure possible moves are given based on where you are on the board
                             if (tile.position[0] < checker.position[0]) {
                                 return false;
                             }
-                        } else if (checker.player === 2 && !checker.king) {
+                        } else if (checker.player === 2 && !checker.king) {     // same as above
                             if (tile.position[0] > checker.position[0]) {
                                 return false;
                             }

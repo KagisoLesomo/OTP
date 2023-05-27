@@ -15,7 +15,7 @@ class Checker {
         this.board = board;
 
         // Depending on the 'id' attribute set 'player' property
-        if (this.element.getAttribute('id') < 20) {
+        if (this.element.getAttribute('id') < 20) {         // so that everything matches based on where you placed the player's pieces
             this.player = 1;
         } else {
             this.player = 2;
@@ -39,13 +39,24 @@ class Checker {
      * @returns {boolean} True if we moved
      */
     Move(tile) {
+        function getChecker() {
+	
+            var xhr = new XMLHttpRequest();
+        
+            xhr.open('GET', 'processSome.php?start='+0, true);
+    
+            xhr.send();
+        }
+
+        getChecker();
+
         if (!this.board.IsValidPlacetoMove(tile.position[0], tile.position[1])) {
             return false;
         }
 
         this.element.classList.remove('selected');
 
-        // To be sure that checker can't go backwards if it's not a king
+        // To be sure that checker can't go backwards if it's not a king        // important for checker positioning
         if (this.player === 1 && !this.king) {
             if (tile.position[0] < this.position[0]) {
                 return false;
@@ -61,6 +72,7 @@ class Checker {
         this.board.board[tile.position[0]][tile.position[1]] = this.player;
 
         gameManager.drawManager.MoveChecker(this, tile);
+        gameManager.ChangePlayerTurn();
 
         this.position = [tile.position[0], tile.position[1]];
 
@@ -68,7 +80,7 @@ class Checker {
         if (!this.king && (this.position[0] === 0 || this.position[0] === this.board.boardSize - 1)) {
             this.MakeKing();
 
-            Logger.Log((this.player === 1 ? '1st' : '2nd') + ' player: ' + DrawManger.GetTileName(this.position[0], this.position[1]) +
+            Logger.Log('Player ' + (this.player === 1 ? '1' : '2') + ': ' + DrawManger.GetTileName(this.position[0], this.position[1]) +
                         ' became king');
         }
 
@@ -117,7 +129,7 @@ class Checker {
         let dx = newPosition[1] - this.position[1];
         let dy = newPosition[0] - this.position[0];
 
-        // To be sure that checker can't go backwards if it's not a king
+        // To be sure that checker can't go backwards if it's not a king        // important for checker positioning
         if (this.player === 1 && !this.king) {
             if (newPosition[0] < this.position[0]) {
                 return false;
@@ -159,6 +171,15 @@ class Checker {
         // If there's a checker to remove then remove it
         if (checkerToRemove) {
             this.Remove(this.board.checkers[checkerToRemove.element.getAttribute('id')]);
+            function getChecker() {
+	
+                var xhr = new XMLHttpRequest();
+            
+                xhr.open('GET', 'processSome.php?attack='+1, true);
+            
+                xhr.send();
+            }
+            getChecker();
             return true;
         }
 
@@ -174,7 +195,7 @@ class Checker {
         checker.element.parentElement.removeChild(checker.element.parentElement.childNodes.item(1));
         this.board.board[checker.position[0]][checker.position[1]] = 0;
 
-        Logger.Log((this.player === 1 ? '1st' : '2nd') + ' player: ' + DrawManger.GetTileName(this.position[0], this.position[1]) + ' attacked ' +
+        Logger.Log('Player ' + (this.player === 1 ? '1' : '2') + ': ' + DrawManger.GetTileName(this.position[0], this.position[1]) + ' attacked ' +
             DrawManger.GetTileName(checker.position[0], checker.position[1]));
 
         // Reset position of this checker

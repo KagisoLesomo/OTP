@@ -4,7 +4,7 @@ class GameManager {
      * @param {number} player Player's checkers, default value is 2
      * @param {number} AIplayer Which one (black or white) checkers the AI will be playing, default value is 1
      */
-    constructor(player = 0, AIplayer = 0) {
+    constructor(player = 2, AIplayer = 1) {
         // Game board
         this.gameBoard = new Board();
         // Draw manager
@@ -13,6 +13,7 @@ class GameManager {
         this.player = player;
         // AI
         this.AI = new AI(AIplayer);
+        this.opponent = new opponent();
     };
 
     /**
@@ -69,22 +70,22 @@ class GameManager {
                         if (checker.CanMove()) {
                             checker.element.classList.add('selected');
                         } else {
-                            setTimeout(() => {
-                                gameManager.AI.TryToMove();
-                            }, 1000);
+                            // setTimeout(() => {
+                            //     gameManager.AI.TryToMove();
+                            // }, 1000);
 
-                            gameManager.ChangePlayerTurn();
+                            // gameManager.ChangePlayerTurn();
                         }
                     }
                     // Otherwise just move
                 } else if (inRange === 1) {
                     if (!checker.CanMove()) {
                         if (checker.Move(tile)) {
-                            setTimeout(() => {
-                                gameManager.AI.TryToMove();
-                            }, 1000);
+                            // setTimeout(() => {
+                            //     gameManager.AI.TryToMove();
+                            // }, 1000);
 
-                            gameManager.ChangePlayerTurn();
+                            // gameManager.ChangePlayerTurn();
                         }
                     }
                 }

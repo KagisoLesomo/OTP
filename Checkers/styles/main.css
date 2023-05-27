@@ -21,6 +21,10 @@ body {
     justify-content: center;
 }
 
+.username {
+    display: none;
+}
+
 .endGame {
     text-align: left;
 }

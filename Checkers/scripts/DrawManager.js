@@ -24,9 +24,66 @@ class DrawManger {
      * @param {Tile} tile Tile to move to
      */
     MoveChecker(checker, tile) {
+
+        function getCircularReplacer() {
+            const ancestors = [];
+            return function (key, value) {
+              if (typeof value !== "object" || value === null) {
+                return value;
+              }
+              // `this` is the object that value is contained in,
+              // i.e., its direct parent.
+              while (ancestors.length > 0 && ancestors.at(-1) !== this) {
+                ancestors.pop();
+              }
+              if (ancestors.includes(value)) {
+                return "[Circular]";
+              }
+              ancestors.push(value);
+              return value;
+            };
+        }
+
+        function getTile() {
+	
+            var xhr = new XMLHttpRequest();
+        
+            xhr.open('GET', 'processSome.php?tile='+JSON.stringify(tile), true);
+    
+            xhr.send();
+        }
+
+        let checkerp = JSON.parse(JSON.stringify(checker,getCircularReplacer()));
+        delete checkerp.board;
+        // console.log(checker.element.getAttribute('id'));
+        checkerp = JSON.stringify(checkerp, getCircularReplacer());
+        // console.log(this.board.checkers[checker.element.getAttribute('id')]);
+
+        function getChecker() {
+	
+            var xhr = new XMLHttpRequest();
+        
+            xhr.open('GET', 'processSome.php?checker='+checkerp, true);
+    
+            xhr.send();
+        }
+
+        function getId() {
+	
+            var xhr = new XMLHttpRequest();
+        
+            xhr.open('GET', 'processSome.php?id='+checker.element.getAttribute('id'), true);
+    
+            xhr.send();
+        }
+
+        getTile();
+        getChecker();
+        getId();
+
         let beenHereAllAlong = document.querySelectorAll('div.beenhereallalong');
 
-        Logger.Log((checker.player === 1 ? '1st' : '2nd') + ' player: ' + DrawManger.GetTileName(checker.position[0], checker.position[1]) + ' > ' +
+        Logger.Log('Player ' + (checker.player === 1 ? '1' : '2') + ': ' + DrawManger.GetTileName(checker.position[0], checker.position[1]) + ' > ' +
             DrawManger.GetTileName(tile.position[0], tile.position[1]));
 
         let tiles = document.querySelector('div.tiles');
@@ -88,6 +145,7 @@ class DrawManger {
                 }
             }
         }
+        console.log("da case");
     };
 
     /**

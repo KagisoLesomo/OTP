@@ -6,7 +6,7 @@ class AI {
     constructor(player) {
         this.player = player;
         // Is AI active?
-        this.active = true;
+        this.active = false;
         // Used for storing possible tiles to move to
         this.possibleTiles;
         // Used to store possible checkers to move
