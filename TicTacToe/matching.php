@@ -1,0 +1,68 @@
+<?php
+
+session_start();
+include 'connection.php';
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
+
+
+sleep(10);
+
+require_once("../functions.php");
+
+$id = $_SESSION['player']['id'];
+
+$result = db_select('player', "id != {$id} && tic_tac_toe = 1");
+
+if (count($result) != 0) {
+
+    foreach($result as $key => $value) {
+        $_SESSION['opponent'] = $value;
+
+        if ($_SESSION['opponent']['gameId'] != 0) {
+            $res = db_select('player', "id = {$id} && gameId = {$_SESSION['opponent']['gameId']}");
+        
+
+            //Checks if you are already in a game and you can continue
+            if ($res[0]['id'] != null){
+                $_SESSION['pid'] = $id;
+                $_SESSION['gamesessionid'] = $_SESSION['opponent']['gameId'];
+                $_SESSION['pltype'] = "sender";
+                header("Location: game.php");
+                die();
+            }
+        }else {
+            break;
+        }
+    }
+    
+    if ($_SESSION['opponent'] != null && $_SESSION['opponent']['gameId'] == 0) {
+        $token = rand(10000, 10000000);
+
+        db_update('player', ['gameId' => $token], "id = {$id}");
+        db_update('player', ['gameId' => $token], "id = {$_SESSION['opponent']['id']}");
+        $gameId = $token;
+        
+        // pl1id is reciever id and pl2 is senderid
+        $sql = "INSERT INTO ".$dbname.".`gamesessions`(`sessionid`, `pl1id`, `pl2id`, `box1`, `box2`, `box3`, `box4`, `box5`, `box6`, `box7`, `box8`, `box9`, `pl1scr`, `pl2scr`, `turn`, `count`) VALUES (".$gameId.",".$id.",".$_SESSION['opponent']['id'].",0,0,0,0,0,0,0,0,0,0,0,0,0)";
+        $conn->query($sql);
+        $sql = "select * from ".$dbname.".gamesessions where pl1id =".$id." and pl2id=".$_SESSION['opponent']['id'];
+        $result = $conn->query($sql);
+        while($row = $result->fetch_assoc()){
+            $_SESSION['gamesessionid'] = $row['sessionid'];
+        }
+
+        $_SESSION['pltype'] = "rec";
+
+        $_SESSION['pid'] = $_SESSION['player']['id'];
+        $_SESSION['boxs'] = array(0,0,0,0,0,0,0,0,0);
+        header("Location: game.php");
+        die();
+
+    }
+}
+
+$sql = "DELETE FROM ".$dbname.".`online` WHERE plrid=".$_SESSION['player']['id'];
+$conn->query($sql);
+header("Location: noMatch.php");
