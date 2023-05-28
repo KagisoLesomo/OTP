@@ -4,5 +4,6 @@ $server = "localhost";
 $username = "root";
 $password = "";
 $dbname = "otp1";
+$dbnameGH = "TTC_Game_History";
 
 ?>

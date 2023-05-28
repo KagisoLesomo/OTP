@@ -43,7 +43,28 @@ if (count($result) != 0) {
         db_update('player', ['gameId' => $token], "id = {$id}");
         db_update('player', ['gameId' => $token], "id = {$_SESSION['opponent']['id']}");
         $gameId = $token;
-        
+        $gameIdStr = "g" . $gameId;
+
+        //Starts Game Recording Game History
+        $connHist = new mysqli($server, $username, $password, $dbnameGH); //TTT History database
+        $sqlConn = "CREATE TABLE ".$gameIdStr." (
+            `box1` int(11) DEFAULT NULL,
+            `box2` int(11) DEFAULT NULL,
+            `box3` int(11) DEFAULT NULL,
+            `box4` int(11) DEFAULT NULL,
+            `box5` int(11) DEFAULT NULL,
+            `box6` int(11) DEFAULT NULL,
+            `box7` int(11) DEFAULT NULL,
+            `box8` int(11) DEFAULT NULL,
+            `box9` int(11) DEFAULT NULL)";
+        $connHist->query($sqlConn);
+        $sqlConn = "INSERT INTO  ".$gameIdStr." (`box1`, `box2`, `box3`, `box4`, `box5`, `box6`, `box7`, `box8`, `box9`) VALUES (0,0,0,0,0,0,0,0,0)";
+        $connHist->query($sqlConn);
+        $connHist->close();
+        //Local database (basically just used to reference to other database)
+        $sql = "INSERT INTO ".$dbname.".`gameHist`(`sessionid`, `pl1id`, `pl2id`, `gTable`) VALUES (".$gameId.",".$id.",".$_SESSION['opponent']['id'].",'{$gameIdStr}')";
+        $conn->query($sql);
+
         // pl1id is reciever id and pl2 is senderid
         $sql = "INSERT INTO ".$dbname.".`gamesessions`(`sessionid`, `pl1id`, `pl2id`, `box1`, `box2`, `box3`, `box4`, `box5`, `box6`, `box7`, `box8`, `box9`, `pl1scr`, `pl2scr`, `turn`, `count`) VALUES (".$gameId.",".$id.",".$_SESSION['opponent']['id'].",0,0,0,0,0,0,0,0,0,0,0,0,0)";
         $conn->query($sql);
