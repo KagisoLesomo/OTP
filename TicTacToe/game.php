@@ -220,7 +220,7 @@ radbtn();
   <div class="container-fluid"> 
     <!-- Brand and toggle get grouped for better mobile display -->
    <a href="online.php" > <button style="float:left; margin:2%;" class="btn btn-default"><span class="glyphicon glyphicon-backward"> </span> Back</button></a>
-    <a href="Logout.php" > <button style="float:right; margin:2%;" class="btn btn-default"> <span class="glyphicon glyphicon-log-out"> </span> Log Out</button></a>
+    <a href="logout.php" > <button style="float:right; margin:2%;" class="btn btn-default"> <span class="glyphicon glyphicon-log-out"> </span> Quit</button></a>
       
 </div></nav>
 <body style="background:#8DC9F4;">

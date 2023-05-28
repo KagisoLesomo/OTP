@@ -74,23 +74,6 @@ function db_update($table_name, $data, $condition){
 
 
 
-function ready_online(){
-
-    global $conn;
-
-    //Adds online status i.e. adds user info to 'online' table NB: ONLY FOR TICTACTOE
-    $sql = "DELETE FROM online WHERE plrid = ".$_SESSION['player']['id'];
-	$res = $conn->query($sql);
-	$sql = "INSERT INTO online(`plrid`, `plrname`) VALUES (".$_SESSION['player']['id'].",'".$_SESSION['player']['username']."')";
-	$res = $conn->query($sql);
-
-}
-
-
-
-
-
-
 
 function db_insert($table_name, $data)
 {

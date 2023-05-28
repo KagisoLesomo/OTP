@@ -9,7 +9,6 @@ require_once("../functions.php");
 $id = $_SESSION['player']['id'];
 
 //Adds online status i.e. adds user info to 'online' table
-ready_online();
 db_update('player', ["tic_tac_toe" => 1], "id={$id}");
 
 header("Location: matching.php");
