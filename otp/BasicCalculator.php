@@ -1,5 +1,5 @@
 <?php
-namespace Calculator;
+namespace otp;
 
 class BasicCalculator
 {
