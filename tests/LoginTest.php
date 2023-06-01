@@ -1,7 +1,11 @@
 <?php
 
+use PHPUnit\Framework\TestCase;
 
-class LoginTest extends PHPUnit\Framework\TestCase
+require_once("functions.php");
+require_once("login.php");
+
+class LoginTest extends TestCase
 {
     public function testSuccessfulLoginRedirectsToHomepage()
     {
