@@ -6,7 +6,7 @@ use otp\BasicCalculator;
 class calculatorTest extends PHPUnit\Framework\TestCase
 {
     /**
-     * @covers Calculator\BasicCalculator
+     * @covers otp\BasicCalculator
     */
     public function testAdd()
     {
@@ -18,7 +18,7 @@ class calculatorTest extends PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers Calculator\BasicCalculator
+     * @covers otp\BasicCalculator
     */
     public function testSubtract()
     {
@@ -31,9 +31,9 @@ class calculatorTest extends PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers Calculator\BasicCalculator
+     * @covers otp\BasicCalculator
     */
-    public function testMultiply()
+    public functioCalculatorn testMultiply()
     {
         $this->assertEquals(BasicCalculator::multiply(1, 2), 2.0);
         $this->assertEquals(BasicCalculator::multiply(1.0, 2.0), 2.0);
@@ -43,7 +43,7 @@ class calculatorTest extends PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers Calculator\BasicCalculator
+     * @covers otp\BasicCalculator
     */
     public function testDivide()
     {
