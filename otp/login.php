@@ -1,5 +1,7 @@
 <?php
 
+
+namespace otp;
 require_once("functions.php");
 
 $username=trim($_POST['username']);
