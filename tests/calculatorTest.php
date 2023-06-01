@@ -33,7 +33,7 @@ class calculatorTest extends PHPUnit\Framework\TestCase
     /**
      * @covers otp\BasicCalculator
     */
-    public functioCalculatorn testMultiply()
+    public function testMultiply()
     {
         $this->assertEquals(BasicCalculator::multiply(1, 2), 2.0);
         $this->assertEquals(BasicCalculator::multiply(1.0, 2.0), 2.0);
