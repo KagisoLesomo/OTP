@@ -1,7 +1,7 @@
 <?php
 require 'vendor/autoload.php';
 
-use Calculator\BasicCalculator;
+use otp\BasicCalculator;
 
 class calculatorTest extends PHPUnit\Framework\TestCase
 {
