@@ -2,8 +2,8 @@
 
 use PHPUnit\Framework\TestCase;
 
-require_once("../functions.php");
-require_once("../login.php");
+require_once("functions.php");
+require_once("login.php");
 
 class LoginTest extends TestCase
 {
