@@ -1,6 +1,5 @@
 <?php
 
-namespace otp;
 
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
@@ -12,8 +11,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
 $conn = new mysqli('localhost', 'root', '', 'otp');
 
-class Functions 
-{
+
 function db_select($table, $condition = null)
 {
     $sql = "SELECT * FROM $table ";
@@ -137,6 +135,4 @@ function login_user($username, $password)
     $_SESSION['player'] = $row;
 
     return true;
-}
-
 }
