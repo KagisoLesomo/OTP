@@ -21,7 +21,7 @@
     <coverage cacheDirectory=".phpunit.cache/code-coverage"
               processUncoveredFiles="true">
         <include>
-            <directory suffix=".php">./</directory>
+            <directory suffix=".php">calculator</directory>
         </include>
     </coverage>
 </phpunit>

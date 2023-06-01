@@ -1,5 +1,5 @@
 {
-    "name": "codecov/otp",
+    "name": "kagisolesomo/otp",
     "type": "library",
     "license": "MIT",
     "homepage": "https://github.com/kagisolesomo/otp",
@@ -19,7 +19,7 @@
     },
     "autoload": {
         "files": [
-            ""
+            "calculator/BasicCalculator.php"
         ]
     }
 }
