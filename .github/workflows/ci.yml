@@ -16,4 +16,7 @@ jobs:
         run: vendor/bin/phpunit --coverage-clover coverage.xml .
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
-          env: CODECOV_TOKEN: ${{ secrets.CWENGA_WAS_HERE }}
+        with:
+            token: ${{ secrets.CODE_COV_TOKEN }}
+            files: ./coverage.xml
+            verbose: true
