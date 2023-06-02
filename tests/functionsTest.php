@@ -6,7 +6,10 @@ use otp\FunctionDatabase;
 class FunctionDatabaseTest extends TestCase
 {
     protected static $database;
-
+    
+    /**
+     * @covers otp\FunctionDatabase
+     */
     public static function setUpBeforeClass(): void
     {
         // Establish a database connection before running the tests
