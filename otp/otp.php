@@ -58,6 +58,34 @@ class Database
     }
 }
 
+class UpdatePassword
+{
+    private $updateDatabase;
 
+    public function __construct(UpdateDatabase $updateDatabase)
+    {
+        $this->updateDatabase = $updateDatabase;
+    }
+
+    public function changePassword($username, $newPassword)
+    {
+        // Call the updatePassword method of the updateDatabase object
+        return $this->updateDatabase->updatePassword($username, $newPassword);
+    }
+}
+
+class UpdateDatabase
+{
+    public function updatePassword($username, $newPassword)
+    {
+        // Replace this with your actual database update logic
+        // Simulate a successful password update if the username is 'admin'
+        if ($username === 'admin') {
+            return true;
+        }
+
+        return false;
+    }
+}
 
 
