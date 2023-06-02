@@ -2,19 +2,17 @@
 require 'vendor/autoload.php';
 
 use otp\otp;
+use otp\php;
 
-class addTest extends PHPUnit\Framework\TestCase
+class phpTest extends PHPUnit\Framework\TestCase
 {
     /**
      * @covers otp\otp
     */
-    public function testAdd()
+    public function testHello()
     {
-        $this->assertEquals(otp::add(1, 2), 3.0);
-        $this->assertEquals(otp::add(1.0, 2.0), 3.0);
-        $this->assertEquals(otp::add(0, 2.0), 2.0);
-        $this->assertEquals(otp::add(2.0, 0), 2.0);
-        $this->assertEquals(otp::add(-4, 2.0), -2.0);
+        $this->assertEquals(php::hello("cwenga"), "cwenga");
+     
     }
 
 }
