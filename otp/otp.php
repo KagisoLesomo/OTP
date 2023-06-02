@@ -28,5 +28,9 @@ class otp
 
 class user{
 
+    public static function hello(string $name){
+        return $name;
+    }
+
 }
 
