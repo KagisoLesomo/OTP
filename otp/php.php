@@ -1,5 +1,5 @@
 <?php
-namespace otp;
+namespace php;
 
 class php
 {
