@@ -5,10 +5,12 @@ use otp\GameDatabase;
 use otp\GameHistory;
 use PHPUnit\Framework\TestCase;
 
+
 class GameHistoryTest extends TestCase
 {
 
-    /**
+
+  /**
      * @covers otp\GameDatabase
      * @covers otp\GameHistory
      */
@@ -81,5 +83,31 @@ class GameHistoryTest extends TestCase
 
         // Assert that the retrieved game history matches the expected result
         $this->assertEquals($expectedResult, $result);
+    }
+
+
+  /**
+     * @covers otp\GameDatabase
+     * @covers otp\GameHistory
+     */
+    public function testRetrieveGameHistoryWithEmptyData()
+    {
+        // Create a mock game database object
+        $gameDatabaseMock = $this->getMockBuilder(GameDatabase::class)
+            ->getMock();
+
+        // Set up the mock to return empty game history data
+        $gameDatabaseMock->expects($this->once())
+            ->method('getGameHistory')
+            ->willReturn([]);
+
+        // Create an instance of the GameHistory class with the mock game database
+        $gameHistory = new GameHistory($gameDatabaseMock);
+
+        // Call the retrieveGameHistory method to get the game history
+        $result = $gameHistory->retrieveGameHistory();
+
+        // Assert that the retrieved game history is an empty array
+        $this->assertEmpty($result);
     }
 }
