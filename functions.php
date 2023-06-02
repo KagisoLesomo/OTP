@@ -8,7 +8,8 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-$conn = new mysqli('localhost', 'root', '', 'otp');
+$conn = new mysqli('localhost', 'root', '', 'otp1'); 
+
 
 function db_select($table, $condition = null)
 {
@@ -70,6 +71,9 @@ function db_update($table_name, $data, $condition){
 
 
 }
+
+
+
 
 function db_insert($table_name, $data)
 {

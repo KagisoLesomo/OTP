@@ -1,20 +1,18 @@
 <?php
-session_start();
-include 'connection.php';
-$conn = new mysqli($server, $username, $password);
-// Check connection
-if ($conn->connect_error) {
-	$error = "Connection failed: " . $conn->connect_error;
-} 
-$sql = "DELETE FROM  ".$dbname.".`requests` WHERE senderid=".$_SESSION['player']['id'];
-$conn->query($sql);
-$sql = "DELETE FROM ".$dbname.".`online` WHERE plrid=".$_SESSION['player']['id'];
-$conn->query($sql);
-if($conn->query($sql) == true){
-	session_unset();
-header("Location: /index.html"); /* Redirect browser */
-session_destroy();
-exit();
-}
 
-?>
+require_once("../functions.php");
+
+db_update('player', ['tic_tac_toe' => 0, 'gameIdTTT' => 0], "id = {$_SESSION['player']['id']}");
+db_update('player', ['tic_tac_toe' => 0, 'gameIdTTT' => 0], "id = {$_SESSION['opponent']['id']}");
+
+include 'connection.php';
+
+$sql = "DELETE FROM ".$dbname.".`gamesessions` WHERE pl1id=".$_SESSION['player']['id'];
+$conn->query($sql);
+$sql = "DELETE FROM ".$dbname.".`gamesessions` WHERE pl2id=".$_SESSION['player']['id'];
+$conn->query($sql);
+
+
+$_SESSION['opponent'] = null;
+
+header("Location: ../homepage.php");

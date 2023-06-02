@@ -1,3 +1,67 @@
+var gameHist = [];
+var gameStart = 1;
+var player;
+var opp;
+var player1;
+var player2;
+fetchPlayer();
+fetchOpp();
+fetchCheckers();
+
+if (player.player == 1){
+    player1 = player.username;
+    player2 = opp.username;
+}else{
+    player1 = opp.username;
+    player2 = player.username;
+}
+
+function fetchCheckers() {
+    var xhr = new XMLHttpRequest();
+
+    xhr.open('GET', 'fetchCheckers.php', false);
+
+    xhr.onload = function() {
+        if (this.status == 200) {
+            let info = JSON.parse(this.responseText);
+
+            gameHist = info[0].gameHist;
+            gameStart = info[0].start;
+        }
+    }
+    xhr.send();
+}
+
+function fetchPlayer() {
+    var xhr = new XMLHttpRequest();
+
+    xhr.open('GET', 'fetchPlayer.php', false);
+
+    xhr.onload = function() {
+        if (this.status == 200) {
+            let info = JSON.parse(this.responseText);
+    
+            player = info[0];
+        }
+    }
+    xhr.send();
+}
+
+function fetchOpp() {
+    var xhr = new XMLHttpRequest();
+
+    xhr.open('GET', 'fetchOpp.php', false);
+
+    xhr.onload = function() {
+        if (this.status == 200) {
+            let info = JSON.parse(this.responseText);
+    
+            opp = info[0];
+        }
+    }
+    xhr.send();
+}
+
 // Class used to draw the board and checkers
 class DrawManger {
     /**
@@ -54,6 +118,18 @@ class DrawManger {
         }
 
         let checkerp = JSON.parse(JSON.stringify(checker,getCircularReplacer()));
+        let board = JSON.stringify(checkerp.board.board);
+        if (gameHist == 'none' || gameStart == 1) {
+            gameHist = [];
+            gameHist.push(checkerp.board.board);
+            gameHist = JSON.stringify(gameHist);
+        }else{
+            console.log(gameHist);
+            gameHist = JSON.parse(gameHist);
+            gameHist.push(checkerp.board.board);
+            gameHist = JSON.stringify(gameHist);
+        }
+        console.log(board);
         delete checkerp.board;
         // console.log(checker.element.getAttribute('id'));
         checkerp = JSON.stringify(checkerp, getCircularReplacer());
@@ -68,6 +144,15 @@ class DrawManger {
             xhr.send();
         }
 
+        function getBoard() {
+	
+            var xhr = new XMLHttpRequest();
+        
+            xhr.open('GET', 'processSome.php?board='+board, true);
+    
+            xhr.send();
+        }
+
         function getId() {
 	
             var xhr = new XMLHttpRequest();
@@ -77,13 +162,24 @@ class DrawManger {
             xhr.send();
         }
 
+        function getGame() {
+	
+            var xhr = new XMLHttpRequest();
+        
+            xhr.open('GET', 'processSome.php?hist='+gameHist, true);
+    
+            xhr.send();
+        }
+
         getTile();
         getChecker();
         getId();
+        getBoard();
+        getGame();
 
         let beenHereAllAlong = document.querySelectorAll('div.beenhereallalong');
 
-        Logger.Log('Player ' + (checker.player === 1 ? '1' : '2') + ': ' + DrawManger.GetTileName(checker.position[0], checker.position[1]) + ' > ' +
+        Logger.Log((checker.player == 1? player1 : player2) + ': ' + DrawManger.GetTileName(checker.position[0], checker.position[1]) + ' > ' +
             DrawManger.GetTileName(tile.position[0], tile.position[1]));
 
         let tiles = document.querySelector('div.tiles');
@@ -181,8 +277,10 @@ class DrawManger {
     */
     DrawBoard() {
         let tiles = document.querySelector('div.tiles');
+        console.log(tiles);
         let tilesCount = 0;
         let chekersCount = 0;
+        console.log(this.board.board);
 
         for (let row in this.board.board) {
             let horizontal = document.createElement('div');

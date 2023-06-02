@@ -51,6 +51,17 @@ body , html{
 	padding: 0;	
 }
 
+.left-join-friends-section img {
+	margin-top: 2rem;
+	max-height: 60vh;
+	max-width: 60vh;
+	margin-bottom: 1.5rem;
+}
+
+.left-join-friends-section h1, h3 {
+	margin: 0;
+	padding: 0;	
+}
 
 .accent-text {
   color: #BC3A80;
@@ -63,13 +74,92 @@ body , html{
 	align-items: center;
 }
 
+.see-friendlist {
+  display: flex;
+  justify-content: space-between;
+}
+
+.see-friendlist button {
+  margin: .45rem;
+  background-color: #2756B1;
+}
+
+.see-friendlist > form {
+  margin: 0;
+  padding: 0;
+  width: 1vw;
+  height: 1vw;
+}
+
+.accept-reject > form {
+  margin: 0;
+  padding: 0;
+}
+
+.accept-reject {
+  display: flex;
+  flex-direction: row;
+}
+
+
 .left-join-section a {
 	color: blue;
 }
 
+.left-join-friends-section {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.left-join-friends-section a {
+	color: blue;
+}
+
+
 .input-group a {
 	text-decoration: none;
 	color: white;
+}
+
+.friend-input-group a {
+	text-decoration: none;
+	color: white;
+}
+
+.search-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: #E3C3CE;
+  width: 40vw;
+  border-radius: 20px;
+}
+
+.search-container input {
+  outline: none;
+  background: #E3C3CE;
+  height: match-parent;
+  width: 36vw;
+  border: 0px;
+  font-size: 1em;
+  padding: .5em;
+  color: inherit;
+  border-radius: 20px;
+  margin-top: 0.5rem;
+}
+
+.search-container button {
+  width: 1vw; 
+  height: 1vh;	
+  padding: 1.63rem 1.5rem;	
+  border: 0px;	
+  background-image: url(search-icon.png);	
+  background-color: transparent;
+  background-size: cover;	
+  background-repeat: no-repeat;	
+  background-position: bottom;
 }
 
 .join-form {
@@ -110,6 +200,23 @@ body , html{
 	align-items: left;
 }
 
+.friends-container {
+	background-color: #E3C3CE;
+	width: 60vw;
+	max-width: 60%;
+	padding: 1.5rem 2.7rem 0 2.7rem;
+	border-radius: 20px;
+	margin-bottom: 2rem;
+}
+
+.friends-container h1 {
+	padding: 0;
+	margin: 0;
+	font-size: 2.5rem;
+	justify-content: left;
+	align-items: left;
+}
+
 .landing-container h1 {
 	justify-content: center;
 	align-items: center;
@@ -142,6 +249,18 @@ body , html{
 	background-position: center;
 }
 
+.search-icon-container {
+	width: 1vw;
+	height: 1vh;
+	padding: 1rem 1rem;
+	border-radius: 2px;
+	background-image: url(search-icon.png);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: right;	
+ background-color: transparent;
+}
+
 .update-info-container {
 	background-color: #2756B1;
 	width: 100%;
@@ -162,18 +281,25 @@ body , html{
 	border-radius: 20px;
 	margin-bottom: 1.3rem;
 }
-.input-group {
-	margin-bottom: 2rem;
+.friend-input-group {
+  margin: 2rem;
+  margin-top: 0;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 }
 
-.input-group:last-child {
-	margin-bottom: 0;
+.friend-input-group:last-child {
+	margin-bottom: 1rem;
+ margin-left: 0;
 }
 
-.input-group label {
+.friend-input-group h3 {
+  
+  font-size: 1.75rem;
+}
+
+.friend-input-group label {
 	color: white;
 	text-shadow:
     /* Outline OR stroke on letters*/
@@ -189,6 +315,26 @@ body , html{
 	font-weight: bold;
 	margin-bottom: .5rem;
 }
+
+.input-group {
+	margin-bottom: 2rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+	.input-group:last-child {
+		margin-bottom: 0;
+	}
+
+	.input-group label {
+		color: white;
+		text-shadow:
+		/* Outline OR stroke on letters*/
+		-1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000, 1px 1px 0 #000000, -2px 0 0 #000000, 2px 0 0 #000000, 0 2px 0 #000000, 0 -2px 0 #000000;
+		font-weight: bold;
+		margin-bottom: .5rem;
+	}
 
 .btn {
 	font: inherit;
@@ -221,6 +367,16 @@ body , html{
   padding: .5em;
   color: inherit;
   border-radius: 5px;
+}
+
+.friend-input-group input {
+	outline: none;
+	background: white;
+	border: 2px solid black;
+	font-size: 1em;
+	padding: .5em;
+	color: inherit;
+	border-radius: 5px;
 }
 
 .landing-container {
@@ -256,6 +412,11 @@ body , html{
   .profile-container {
 	  margin-top: 2rem;
   }
+  
+  .friends-container {
+	  margin-top: 2rem;
+  }
+
 
   .join-form {
     width: 80vw;
@@ -267,5 +428,16 @@ body , html{
     flex-direction: column;
     justify-content: center;
   }
+  
+
+  .badge {
+    top: 23px;
+    left: 60px;
+    background-color: #CD366C;
+    color: white;
+    border-radius: 50%;
+    padding: 5px;
+    font-size: 12px;
+    }
 }
 

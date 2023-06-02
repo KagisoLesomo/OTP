@@ -1,5 +1,51 @@
+var Player;
+var opp;
+var player1;
+var player2;
+fetchPlayer();
+fetchOpp();
+
+// if (player.player == 1){
+//     player1 = player;
+//     player2 = opp;
+// }else{
+//     player1 = opp;
+//     player2 = player;
+// }
+
+function fetchPlayer() {
+    var xhr = new XMLHttpRequest();
+
+    xhr.open('GET', 'fetchPlayer.php', false);
+
+    xhr.onload = function() {
+        if (this.status == 200) {
+            let info = JSON.parse(this.responseText);
+    
+            Player = info[0];
+        }
+    }
+    xhr.send();
+}
+
+function fetchOpp() {
+    var xhr = new XMLHttpRequest();
+
+    xhr.open('GET', 'fetchOpp.php', false);
+
+    xhr.onload = function() {
+        if (this.status == 200) {
+            let info = JSON.parse(this.responseText);
+    
+            opp = info[0];
+        }
+    }
+    xhr.send();
+}
+
 // Class that controls the game itself, it's responsible for whole game process
 class GameManager {
+
     /**
      * @param {number} player Player's checkers, default value is 2
      * @param {number} AIplayer Which one (black or white) checkers the AI will be playing, default value is 1
@@ -69,6 +115,7 @@ class GameManager {
 
                         if (checker.CanMove()) {
                             checker.element.classList.add('selected');
+                            gameManager.ChangePlayerTurn();
                         } else {
                             // setTimeout(() => {
                             //     gameManager.AI.TryToMove();
@@ -98,19 +145,20 @@ class GameManager {
      * @param {number} player Player who won 
      */
     EndTheGame(player) {
-        let messageText = 'Player ' + player + ' wins!';
+        let messageText;
+        if (Player.player == player) {
+            messageText = Player.username + ' wins!';
+        }else {
+            messageText = opp.username + ' wins!';
+        }
+        
 
         Logger.Log(messageText);
 
         let message = document.createElement('p');
+        message.innerHTML = messageText;
 
-        if (player === 1) {
-            message.innerHTML = messageText;
-        } else {
-            message.innerHTML = 'Congratulations';
-        }
-
-        new Message(message, player === 1 ? 'You lose!' : 'You win!').ShowWithHeader();
+        new Message(message, player === Player.player ? 'You win!' : 'You lose!').ShowWithHeader();
 
         // Stop the game
         this.Stop();

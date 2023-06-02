@@ -57,11 +57,12 @@ while($row = $result->fetch_assoc()){
 	$turn = $row['turn'];
 	$boxs = array($row['box1'],$row['box2'],$row['box3'],$row['box4'],$row['box5'],$row['box6'],$row['box7'],$row['box8'],$row['box9']);
 	for($i=0; $i<9; $i++){
-    if($_SESSION['boxs'][$i] != $boxs[$i]){
-		
-		$_SESSION['boxs'][$i] = $boxs[$i];
-		echo $i+1;
-	}}
+		if($_SESSION['boxs'][$i] != $boxs[$i]){
+			
+			$_SESSION['boxs'][$i] = $boxs[$i];
+			echo $i+1;
+		}
+	}
 }
 }
 
