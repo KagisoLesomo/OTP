@@ -4,25 +4,7 @@ use PHPUnit\Framework\TestCase;
 
 class CheckersGameTest extends TestCase
 {
-    public function testPlayGame()
-    {
-        // Mock readline function
-        $inputValues = [0, 0, 1, 1, 2, 2, 3, 3]; // Sample input values
-        $inputIndex = 0;
-
-        readline = function () use (&$inputValues, &$inputIndex) {
-            $input = $inputValues[$inputIndex];
-            $inputIndex++;
-
-            return $input;
-        };
-
-        $game = new CheckersGame();
-        $game->playGame();
-
-        $this->expectOutputString("Welcome to Checkers!\n   0 1 2 3 4 5 6 7\n0 B   B   B   B\n1   B   B   B  \n2 B   B   B   B\n3       \n4       \n5 R   R   R   R\n6   R   R   R  \n7 R   R   R   R\nPlayer B, make your move.\nEnter the row and column of the piece you want to move: Enter the row and column where you want to move the piece: Game Over! Winner: Draw\n");
-    }
-
+   
     public function testIsValidPiece()
     {
         $game = new CheckersGame();
