@@ -5,17 +5,17 @@ if(isset($_POST['requestid'])){
 	include "connection.php";
 	// Create connection
 $conn = new mysqli($server, $username, $password);
-$sql = "UPDATE ".$dbname.".`requests` SET `status`=1 WHERE requestid=".$reqid;
+// $sql = "UPDATE ".$dbname.".`requests` SET `status`=1 WHERE requestid=".$reqid;
 if($conn->query($sql) == true){
 	$senderid = "";
 	$sql = "select * from ".$dbname.".requests where requestid=".$reqid;
 	$result = $conn->query($sql);
 	if($result->num_rows>0){
-	while($row = $result->fetch_assoc()){
-		$senderid = $row['senderid'];
+		while($row = $result->fetch_assoc()){
+			$senderid = $row['senderid'];
+		}
 	}
-	}
-	$sql = "DELETE FROM ".$dbname.".`gamesessions` WHERE pl1id=".$_SESSION['player']['id']." and pl2id=".$senderid;
+	$sql = "DELETE FROM ".$dbname.".`gamesessions` WHERE pl1id=".$_SESSION['player']['id']." and pl2id=".$senderid;  //Deletes previous session of the opponents playing
 	$conn->query($sql);
 	
 	// pl1id is reciever id  and pl2 is senderid

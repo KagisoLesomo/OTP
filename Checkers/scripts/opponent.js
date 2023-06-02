@@ -6,6 +6,7 @@ var moveChecker;
 var moveTile;
 var gameStart;
 var attack;
+var prevC = -1;
 
 class opponent {
     
@@ -20,9 +21,6 @@ class opponent {
         gameManager.opponent.fetchSide();
         gameManager.opponent.fetchCheckers();
 
-        console.log(player);
-        console.log(which);
-
         if(player == which || attack == 1) {
             first = true;
         }
@@ -33,6 +31,7 @@ class opponent {
             
             if(attack != 1) {
                 gameManager.drawManager.board.checkers[checkerId].Move(moveTile);
+                gameManager.opponent.getprevC();
             } else {
                 //
                 gameManager.drawManager.board.checkers[checkerId].Attack(moveTile);
@@ -46,9 +45,23 @@ class opponent {
                 }
                 getChecker();
                 gameManager.drawManager.board.checkers[checkerId].Move(moveTile);
+
+                if (prevC == checkerId) {
+                    gameManager.ChangePlayerTurn();
+                }
+                gameManager.opponent.getprevC();
             }
             
         }
+    }
+
+    getprevC() {
+	
+        var xhr = new XMLHttpRequest();
+    
+        xhr.open('GET', 'processSome.php?prevC='+checkerId, true);
+
+        xhr.send();
     }
 
     fetchSide() {
@@ -87,6 +100,8 @@ class opponent {
                 moveTile = JSON.parse(moveTile);
 
                 checkerId = info[0].checkerId;
+
+                prevC = info[0].prevC;
             }
         }
         xhr.send();

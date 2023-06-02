@@ -1,9 +1,10 @@
 <?php
+session_start();
 require_once("database.php");
 
 $db= $conn;
-$tableName="games";
-$columns= ['playerId', 'opponentid','won','gameid','date'];
+$tableName="checkers";
+$columns= ['id', 'gameId', 'player1', 'player2', 'time','date'];
 $fetchData = fetch_data($db, $tableName, $columns);
 
 function fetch_data($db, $tableName, $columns){
@@ -14,8 +15,8 @@ function fetch_data($db, $tableName, $columns){
  }elseif(empty($tableName)){
    $msg= "Table Name is empty";
 }else{
-
-$query = "SELECT * FROM $tableName"."";
+$id = $_SESSION['player']['id'];
+$query = "SELECT * FROM $tableName WHERE player1 = $id or player2 = $id";
 $result = $db->query($query);
 
 if($result== true){ 

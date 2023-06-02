@@ -1,11 +1,11 @@
 <?php 
 session_start();
 if(!(isset($_SESSION['player']['username']))){
-	header("Location: index.php"); /* Redirect browser */
+	header("Location: ../homepage.php"); /* Redirect browser */
 exit();
 }
 if(!isset($_SESSION['pid'])){
-	header("Location: online.php"); /* Redirect browser */
+	header("Location: ../profile-page.php"); /* Redirect browser */
 exit();
 }
 
@@ -186,7 +186,8 @@ radbtn();
 			}
 			
 		}}
-		$(".div1").click(function(){
+		
+	$(".div1").click(function(){
 		onbuttonclick(1);
     });
 	$(".div2").click(function(){
@@ -220,7 +221,7 @@ radbtn();
   <div class="container-fluid"> 
     <!-- Brand and toggle get grouped for better mobile display -->
    <a href="online.php" > <button style="float:left; margin:2%;" class="btn btn-default"><span class="glyphicon glyphicon-backward"> </span> Back</button></a>
-    <a href="Logout.php" > <button style="float:right; margin:2%;" class="btn btn-default"> <span class="glyphicon glyphicon-log-out"> </span> Log Out</button></a>
+    <a href="logout.php" > <button style="float:right; margin:2%;" class="btn btn-default"> <span class="glyphicon glyphicon-log-out"> </span> Quit</button></a>
       
 </div></nav>
 <body style="background:#8DC9F4;">
@@ -254,7 +255,7 @@ radbtn();
 
   <!-- Modal content --> 
       <h1 id="plwin"> </h1><br>
-  <form action="/homepage.php">  <button type="submit" style="border:1px solid black;" autofocus> Done!</button></form>
+  <form action="logout.php">  <button type="submit" style="border:1px solid black;" autofocus> Done!</button></form>
 </div>
 </body>
 </html>

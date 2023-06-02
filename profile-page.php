@@ -29,7 +29,7 @@
 		<nav class="main-nav">
 			<ul>
 				<li> <a href="homepage.php"> Play Now </a> </li>
-				<li> <a href="#"> Spectate </a> </li>
+				<li> <a href="friend.php"> Friends </a> </li>
 				<li> <a href="/prevgames/html.php"> Game History </a> </li>
 				<li> <a href="logout.php"> Logout <i class="fa-solid fa-right-from-bracket"></i> </a> </li>				
 			</ul>

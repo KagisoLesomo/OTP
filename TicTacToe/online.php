@@ -59,7 +59,7 @@ $error = "";
 <nav class="navbar navbar-default">
   <div class="container-fluid"> 
    
-    <a href="logout.php" > <button style="float:right; margin:2%;" class="btn btn-default"> <span class="glyphicon glyphicon-log-out"> </span> Log Out</button></a>
+    <a href="/homepage.php" > <button style="float:right; margin:2%;" class="btn btn-default"> <span class="glyphicon glyphicon-log-out"> </span> Quit</button></a>
       
 </div></nav>
 <div class="container text-center" style="text-align:center;">

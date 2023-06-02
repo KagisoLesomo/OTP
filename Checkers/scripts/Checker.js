@@ -1,3 +1,48 @@
+var player;
+var opp;
+var player1;
+var player2;
+fetchPlayer();
+fetchOpp();
+
+if (player.player == 1){
+    player1 = player.username;
+    player2 = opp.username;
+}else{
+    player1 = opp.username;
+    player2 = player.username;
+}
+
+function fetchPlayer() {
+    var xhr = new XMLHttpRequest();
+
+    xhr.open('GET', 'fetchPlayer.php', false);
+
+    xhr.onload = function() {
+        if (this.status == 200) {
+            let info = JSON.parse(this.responseText);
+    
+            player = info[0];
+        }
+    }
+    xhr.send();
+}
+
+function fetchOpp() {
+    var xhr = new XMLHttpRequest();
+
+    xhr.open('GET', 'fetchOpp.php', false);
+
+    xhr.onload = function() {
+        if (this.status == 200) {
+            let info = JSON.parse(this.responseText);
+    
+            opp = info[0];
+        }
+    }
+    xhr.send();
+}
+
 // Checker class, holds the logic of checker
 class Checker {
     /**
@@ -80,7 +125,7 @@ class Checker {
         if (!this.king && (this.position[0] === 0 || this.position[0] === this.board.boardSize - 1)) {
             this.MakeKing();
 
-            Logger.Log('Player ' + (this.player === 1 ? '1' : '2') + ': ' + DrawManger.GetTileName(this.position[0], this.position[1]) +
+            Logger.Log((this.player == 1 ? player1 : player2) + ': ' + DrawManger.GetTileName(this.position[0], this.position[1]) +
                         ' became king');
         }
 
@@ -195,7 +240,7 @@ class Checker {
         checker.element.parentElement.removeChild(checker.element.parentElement.childNodes.item(1));
         this.board.board[checker.position[0]][checker.position[1]] = 0;
 
-        Logger.Log('Player ' + (this.player === 1 ? '1' : '2') + ': ' + DrawManger.GetTileName(this.position[0], this.position[1]) + ' attacked ' +
+        Logger.Log((this.player == 1 ? player1 : player2) + ': ' + DrawManger.GetTileName(this.position[0], this.position[1]) + ' attacked ' +
             DrawManger.GetTileName(checker.position[0], checker.position[1]));
 
         // Reset position of this checker

@@ -5,7 +5,7 @@ error_reporting(E_ALL);
 $hostName = "localhost";
 $userName = "root";
 $password = "";
-$databaseName = "otp";
+$databaseName = "otp1";
  $conn = new mysqli($hostName, $userName, $password, $databaseName);
 // Check connection
 if ($conn->connect_error) {
