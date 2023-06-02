@@ -78,7 +78,6 @@ class UpdateDatabase
 {
     public function updatePassword($username, $newPassword)
     {
-        // Replace this with your actual database update logic
         // Simulate a successful password update if the username is 'admin'
         if ($username === 'admin') {
             return true;
@@ -118,7 +117,7 @@ class GameDatabase
 {
     public function getGameHistory()
     {
-        // Replace this with your actual database query logic
+    
         // Simulate retrieving game history data from the database
         return [
             [
@@ -143,6 +142,54 @@ class GameDatabase
                 'played_at' => '2023-06-02 16:15:00'
             ],
         ];
+    }
+}
+
+
+class FunctionDatabase
+{
+    protected $connection;
+
+    public function __construct($host, $username, $password, $database)
+    {
+        // Establish a database connection
+        $this->connection = new \mysqli($host, $username, $password, $database);
+    }
+
+    public function isConnected()
+    {
+        // Check if the database connection is established
+        return $this->connection->connect_errno === 0;
+    }
+
+    public function writePlayerData($playerData)
+    {
+        $name = $playerData['name'];
+        $atHome = $playerData['at_home'];
+        $password = $playerData['password'];
+
+        // Insert player data into the "players" table
+        $query = "INSERT INTO players (name, at_home, password) VALUES (?, ?, ?)";
+        $statement = $this->connection->prepare($query);
+        $statement->bind_param('sis', $name, $atHome, $password);
+        $result = $statement->execute();
+        $statement->close();
+
+        return $result;
+    }
+
+    public function getPlayerData($name)
+    {
+        // Retrieve player data from the "players" table
+        $query = "SELECT * FROM players WHERE name = ?";
+        $statement = $this->connection->prepare($query);
+        $statement->bind_param('s', $name);
+        $statement->execute();
+        $result = $statement->get_result();
+        $playerData = $result->fetch_assoc();
+        $statement->close();
+
+        return $playerData;
     }
 }
 
