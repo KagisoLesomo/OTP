@@ -151,4 +151,3 @@ class GameHistoryTest extends TestCase
         $this->assertEquals($expectedResult, $result);
     }
 }
-}
