@@ -18,10 +18,7 @@ class Signup
         if ($password !== $confirmPassword) {
             return false;
         }
-
-        // Perform any other validation or business logic here
-
-        // Simulate successful registration
+        // if not false then we have successful registration
         return true;
     }
 }
