@@ -10,7 +10,7 @@ class phpTest extends PHPUnit\Framework\TestCase
     */
     public function testHello()
     {
-        $this->assertEquals(\php\php::hello("cwenga"), "cwenga");
+        $this->assertEquals(php::hello("cwenga"), "cwenga");
      
     }
 
