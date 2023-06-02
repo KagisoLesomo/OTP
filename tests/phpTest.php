@@ -6,11 +6,11 @@ use otp\php;
 class phpTest extends PHPUnit\Framework\TestCase
 {
     /**
-     * @covers otp\otp
+     * @covers otp\php
     */
     public function testHello()
     {
-        $this->assertEquals(php::hello("cwenga"), "cwenga");
+        $this->assertEquals(\php\php::hello("cwenga"), "cwenga");
      
     }
 
