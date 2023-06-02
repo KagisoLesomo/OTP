@@ -3,7 +3,7 @@ require 'vendor/autoload.php';
 
 use otp\otp;
 
-class calculatorTest extends PHPUnit\Framework\TestCase
+class otpTest extends PHPUnit\Framework\TestCase
 {
     /**
      * @covers otp\BasicCalculator
