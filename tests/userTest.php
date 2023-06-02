@@ -9,7 +9,7 @@ use otp\user;
 
     class userTest extends PHPUnit\Framework\TestCase{
 
-        public function testDivide()
+        public function testhello()
         {
             $this->assertEquals(user::hello("cwenga"), "cwenga");
          
