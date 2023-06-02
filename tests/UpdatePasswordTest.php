@@ -8,7 +8,7 @@ class UpdatePasswordTest extends TestCase
 
        /**
          * @covers otp\UpdateDatabase
-         * @covers\UpdatePassword
+         * @covers otp\UpdatePassword
          */
     public function testUpdatePasswordSuccess()
     {
@@ -31,7 +31,7 @@ class UpdatePasswordTest extends TestCase
     
        /**
          * @covers otp\UpdateDatabase
-         * @covers\UpdatePassword
+         * @covers otp\UpdatePassword
          */
     public function testUpdatePasswordFailure()
     {
