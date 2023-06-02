@@ -21,4 +21,13 @@ class otp
         }
         return $x / $y;
     }
-}
+
+
+
+    public class UserProfile {
+        // some code here
+      }
+  
+      private class UserHistory {
+        // some code here
+      }
