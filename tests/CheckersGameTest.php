@@ -1,7 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-
+use otp\CheckersGame;
 class CheckersGameTest extends TestCase
 {
    
