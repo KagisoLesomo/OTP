@@ -3,7 +3,7 @@ use otp\UpdateDatabase;
 use otp\UpdatePassword;
 use PHPUnit\Framework\TestCase;
 
-class UpdatePasswordTest extends TestCase
+class UpdateDatabaseTest extends TestCase
 {
 
        /**
