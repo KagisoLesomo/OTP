@@ -1,37 +1,20 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use otp\CheckersGame;
 
 class CheckersGameTest extends TestCase
 {
     public function testPlayGame()
     {
         // Mock readline function
-        readline = function () {
-            static $count = 0;
-            $count++;
+        $inputValues = [0, 0, 1, 1, 2, 2, 3, 3]; // Sample input values
+        $inputIndex = 0;
 
-            switch ($count) {
-                case 1:
-                    return 0;
-                case 2:
-                    return 0;
-                case 3:
-                    return 1;
-                case 4:
-                    return 1;
-                case 5:
-                    return 2;
-                case 6:
-                    return 2;
-                case 7:
-                    return 3;
-                case 8:
-                    return 3;
-                default:
-                    return '';
-            }
+        readline = function () use (&$inputValues, &$inputIndex) {
+            $input = $inputValues[$inputIndex];
+            $inputIndex++;
+
+            return $input;
         };
 
         $game = new CheckersGame();
