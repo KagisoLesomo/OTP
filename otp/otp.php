@@ -89,3 +89,61 @@ class UpdateDatabase
 }
 
 
+
+// game history function 
+
+// retrieves necessary game information from mock database for tests
+
+class GameHistory
+{
+    private $gameDatabase;
+
+
+    // database constructor
+    public function __construct(GameDatabase $gameDatabase)
+    {
+        $this->gameDatabase = $gameDatabase;
+    }
+
+    public function retrieveGameHistory()
+    {
+        // Call the getGameHistory method of the game database object
+        return $this->gameDatabase->getGameHistory();
+    }
+}
+
+
+// Game Database 
+class GameDatabase
+{
+    public function getGameHistory()
+    {
+        // Replace this with your actual database query logic
+        // Simulate retrieving game history data from the database
+        return [
+            [
+                'id' => 1,
+                'player_id' => 1,
+                'opponent_id' => 2,
+                'result' => 'win',
+                'played_at' => '2023-06-01 19:30:00'
+            ],
+            [
+                'id' => 2,
+                'player_id' => 1,
+                'opponent_id' => 3,
+                'result' => 'loss',
+                'played_at' => '2023-06-02 14:45:00'
+            ],
+            [
+                'id' => 3,
+                'player_id' => 2,
+                'opponent_id' => 3,
+                'result' => 'win',
+                'played_at' => '2023-06-02 16:15:00'
+            ],
+        ];
+    }
+}
+
+
