@@ -6,6 +6,11 @@ use otp\Signup;
 
 class SignupTest extends \PHPUnit\Framework\TestCase
 {
+
+    /**
+     * @covers otp\Signup
+    */
+
     public function testRegisterWithValidData()
     {
         $signup = new Signup();
@@ -19,6 +24,10 @@ class SignupTest extends \PHPUnit\Framework\TestCase
 
         $this->assertTrue($result);
     }
+     
+    /**
+     * @covers otp\Signup
+    */
 
     public function testRegisterWithInvalidData()
     {
