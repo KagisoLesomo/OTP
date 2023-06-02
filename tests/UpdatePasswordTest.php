@@ -5,13 +5,15 @@ use PHPUnit\Framework\TestCase;
 
 class UpdatePasswordTest extends TestCase
 {
-    public function testUpdatePasswordSuccess()
-    {
 
-        /**
+       /**
          * @covers otp\UpdateDatabase
          * @covers\UpdatePassword
          */
+    public function testUpdatePasswordSuccess()
+    {
+
+     
         // Create a mock database object
         $updateDatabaseMock = $this->getMockBuilder(UpdateDatabase::class)
             ->getMock();
