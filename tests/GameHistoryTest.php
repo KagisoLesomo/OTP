@@ -110,4 +110,45 @@ class GameHistoryTest extends TestCase
         // Assert that the retrieved game history is an empty array
         $this->assertEmpty($result);
     }
+
+    /**
+     * @covers otp\GameDatabase
+     * @covers otp\GameHistory
+     */
+    public function testGetGameHistory()
+    {
+        $gameDatabase = new GameDatabase();
+
+        // Call the getGameHistory method
+        $result = $gameDatabase->getGameHistory();
+
+        // Define the expected result
+        $expectedResult = [
+            [
+                'id' => 1,
+                'player_id' => 1,
+                'opponent_id' => 2,
+                'result' => 'win',
+                'played_at' => '2023-06-01 19:30:00'
+            ],
+            [
+                'id' => 2,
+                'player_id' => 1,
+                'opponent_id' => 3,
+                'result' => 'loss',
+                'played_at' => '2023-06-02 14:45:00'
+            ],
+            [
+                'id' => 3,
+                'player_id' => 2,
+                'opponent_id' => 3,
+                'result' => 'win',
+                'played_at' => '2023-06-02 16:15:00'
+            ],
+        ];
+
+        // Assert that the retrieved game history matches the expected result
+        $this->assertEquals($expectedResult, $result);
+    }
+}
 }
