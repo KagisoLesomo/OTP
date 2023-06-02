@@ -16,11 +16,19 @@ class FunctionDatabaseTest extends TestCase
         self::$database = new FunctionDatabase("localhost", "root", "", "otp");
     }
 
+    /**
+     * @covers otp\FunctionDatabase
+     */
+
     public function testConnectToDatabase()
     {
         // Ensure that the database connection is successful
         $this->assertTrue(self::$database->isConnected());
     }
+
+    /**
+     * @covers otp\FunctionDatabase
+     */
 
     public function testWritePlayerData()
     {
