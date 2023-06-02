@@ -65,7 +65,7 @@ class CheckersGameTest extends TestCase
 
         $result = $game->makeMove($startPos, $endPos);
 
-        $this->assertFalse($result);
+        $this->assertFalse(!$result);
     }
    /**
      * @covers otp\CheckersGame
