@@ -5,6 +5,13 @@ use otp\Checker;
 use PHPUnit\Framework\TestCase;
 
 class CheckerTest extends TestCase {
+
+    
+
+       /**
+     * @covers otp\Checker
+     */
+
     public function testMakeKing() {
         $elementMock = $this->getMockBuilder('Element')->getMock();
         $position = [1, 1];
@@ -17,7 +24,7 @@ class CheckerTest extends TestCase {
 
         $checker->makeKing();
 
-        $this->assertTrue($checker->isKing());
+        $this->assertTrue($checker->Checker::isKing());
     }
 
     /**
