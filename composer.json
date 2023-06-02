@@ -19,7 +19,7 @@
     },
     "autoload": {
         "files": [
-            "otp/BasicCalculator.php"
+            "otp/BasicCalculator.php","otp/CheckersGame.php"
         ]
     }
 }
