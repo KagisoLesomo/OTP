@@ -1,8 +1,8 @@
 <?php
+namespace otp;
 
 require 'vendor/autoload.php';
 
-namespace otp;
 class CheckersGame {
     private $board;
     private $currentPlayer;
