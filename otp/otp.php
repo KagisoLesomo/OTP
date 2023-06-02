@@ -24,10 +24,9 @@ class otp
 
 
 
-    public class UserProfile {
-        // some code here
-      }
-  
-      private class UserHistory {
-        // some code here
-      }
+}
+
+class user{
+
+}
+
