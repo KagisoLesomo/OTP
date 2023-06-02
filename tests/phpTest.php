@@ -1,7 +1,6 @@
 <?php
 require 'vendor/autoload.php';
 
-use otp\otp;
 use otp\php;
 
 class phpTest extends PHPUnit\Framework\TestCase
