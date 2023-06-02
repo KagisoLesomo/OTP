@@ -1,7 +1,7 @@
 <?php
 namespace otp;
 
-class BasicCalculator
+class otp
 {
     public static function add(float $x, float $y) {
         return $x + $y;
