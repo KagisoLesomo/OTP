@@ -19,7 +19,7 @@
     },
     "autoload": {
         "files": [
-            "otp/otp.php", "otp/php.php"
+            "otp/otp.php"
         ]
     }
 }
