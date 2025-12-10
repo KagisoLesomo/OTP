@@ -210,8 +210,8 @@ We welcome feedback and contributions! If you'd like to:
 - Contribute code improvements
 
 Please feel free to:
-- [Open an issue](https://github.com/KagisoLesomo/arenax-tournament/issues) on GitHub
-- [Submit a pull request](https://github.com/KagisoLesomo/arenax-tournament/pulls)
+- [Open an issue](https://github.com/KagisoLesomo/OTP/issues) on GitHub
+- [Submit a pull request](https://github.com/KagisoLesomo/OTP/pulls)
 - Contact us directly (see below)
 
 ---
