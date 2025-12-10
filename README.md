@@ -54,7 +54,6 @@ ArenaX is a web-based competitive gaming platform where users can join online to
 - **HTML5** – Semantic structure for game boards and UI
 - **CSS3** – Responsive design for desktop and tablet gameplay
 - **JavaScript** – Game logic validation, move submission, real-time UI updates
-- **AJAX** – Asynchronous communication with the PHP backend
 
 ### Backend
 - **PHP** for:
@@ -114,45 +113,6 @@ ArenaX is a web-based competitive gaming platform where users can join online to
 - **MySQL 5.7+** for database
 - A modern web browser (Chrome, Firefox, Edge, Safari)
 
-### Installation
-
-1. Clone the repository:
-```bash
-git clone https://github.com/KagisoLesomo/arenax-tournament.git
-cd arenax-tournament
-```
-
-2. Set up the MySQL database:
-```bash
-mysql -u root -p < database/schema.sql
-```
-
-3. Configure your environment:
-   - Copy `config.example.php` to `config.php`
-   - Update database credentials:
-   ```php
-   define('DB_HOST', 'localhost');
-   define('DB_USER', 'your_username');
-   define('DB_PASS', 'your_password');
-   define('DB_NAME', 'arenax');
-   ```
-
-4. Deploy to your LAMP server:
-   - Place the project in your Apache document root:
-   ```bash
-   sudo cp -r . /var/www/html/arenax
-   sudo chown -R www-data:www-data /var/www/html/arenax
-   ```
-
-5. Enable Apache mod_rewrite (if using URL rewrites):
-```bash
-sudo a2enmod rewrite
-sudo systemctl restart apache2
-```
-
-6. Open in your browser:
-   - `http://localhost/arenax/` or your server's domain
-
 ---
 
 ## 🎮 Game Rules
@@ -178,34 +138,6 @@ sudo systemctl restart apache2
 - First to win 2 out of 3 rounds wins the match
 - Results determine rating changes
 
----
-
-## 📡 API Endpoints (Backend)
-
-### User Management
-- `POST /api/register.php` – Create new account
-- `POST /api/login.php` – Authenticate user
-- `GET /api/profile.php?user_id=X` – Get player profile and stats
-- `PUT /api/profile.php` – Update profile information
-
-### Matchmaking
-- `POST /api/queue.php` – Join matchmaking queue
-- `GET /api/match-status.php` – Check if opponent found
-- `POST /api/join-match.php` – Accept and join matched game
-
-### Gameplay
-- `POST /api/move.php` – Submit a move in the current game
-- `GET /api/game-state.php` – Retrieve current board/game state
-- `POST /api/surrender.php` – Forfeit the current match
-
-### Leaderboards
-- `GET /api/leaderboard.php?game=checkers` – Get global rankings
-- `GET /api/leaderboard.php?game=tictactoe` – Tic-Tac-Toe rankings
-- `GET /api/leaderboard.php?game=rps` – Rock–Paper–Scissors rankings
-
-### Match History
-- `GET /api/match-history.php?user_id=X` – Retrieve past matches
-- `GET /api/match-details.php?match_id=X` – View details of a specific match
 
 ---
 
@@ -228,7 +160,6 @@ sudo systemctl restart apache2
 ## ⚠️ Known Issues & Limitations
 
 ### Current Limitations
-- Real-time multiplayer requires periodic AJAX polling (consider WebSocket upgrade for true real-time)
 - Checkers AI opponent not yet implemented (human-vs-human only)
 - Mobile app not yet available (web-only)
 - Maximum concurrent players limited by server resources
@@ -243,7 +174,6 @@ sudo systemctl restart apache2
 ## 🔒 Security Features
 
 - **Password Hashing** – bcrypt for secure credential storage
-- **SQL Injection Prevention** – Prepared statements with parameterized queries
 - **Session Management** – Secure PHP sessions with timeout
 - **CSRF Protection** – Token validation on form submissions
 - **Input Validation** – Strict validation of all game moves and user input
@@ -292,20 +222,13 @@ Please feel free to:
 
 ---
 
-## 👥 Authors
-
-- [@KagisoLesomo](https://github.com/KagisoLesomo)
-- [@SenzoG19](https://github.com/SenzoG19)
-
----
-
 ## 📧 Support & Feedback
 
 Your feedback helps us improve ArenaX! If you encounter any issues, have suggestions, or want to share your experience:
 
-- **[Report a Bug](https://github.com/KagisoLesomo/arenax-tournament/issues)**: Create a GitHub issue with details
-- **[Feature Request](https://github.com/KagisoLesomo/arenax-tournament/issues)**: Suggest new games or features
-- **[Discussions](https://github.com/KagisoLesomo/arenax-tournament/discussions)**: Join community discussions
+- **[Report a Bug](https://github.com/KagisoLesomo/OTP/issues)**: Create a GitHub issue with details
+- **[Feature Request](https://github.com/KagisoLesomo/OTP/issues)**: Suggest new games or features
+- **[Discussions](https://github.com/KagisoLesomo/OTP/discussions)**: Join community discussions
 - **Direct Contact**: Reach out to the authors
 
 ---
@@ -328,49 +251,8 @@ Your feedback helps us improve ArenaX! If you encounter any issues, have suggest
   - Mobile app (React Native)
   - Performance optimization and caching
   - Advanced anti-cheat detection
-
-- **Monetization (Optional)**
-  - Premium cosmetics and battle passes
-  - Tournament entry fees and prize pools
-  - Seasonal content and events
-
 ---
 
-## 📚 Database Schema Overview
-
-Key tables in your MySQL database:
-
-```
-users
-├── user_id (PRIMARY KEY)
-├── username
-├── email
-├── password_hash
-├── rating
-├── total_wins
-├── total_losses
-├── total_draws
-└── created_at
-
-matches
-├── match_id (PRIMARY KEY)
-├── player_1_id (FOREIGN KEY)
-├── player_2_id (FOREIGN KEY)
-├── game_type (checkers, tictactoe, rps)
-├── winner_id
-├── result (win, loss, draw)
-├── rating_change
-└── created_at
-
-game_states
-├── state_id (PRIMARY KEY)
-├── match_id (FOREIGN KEY)
-├── current_player_id
-├── board_state (JSON)
-└── updated_at
-```
-
----
 
 ## 🙏 Thank You
 
