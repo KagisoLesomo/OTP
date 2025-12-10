@@ -216,20 +216,12 @@ Please feel free to:
 
 ---
 
-## 📝 License
-
-[Add your license here - e.g., MIT, Apache 2.0, etc.]
-
----
-
 ## 📧 Support & Feedback
 
 Your feedback helps us improve ArenaX! If you encounter any issues, have suggestions, or want to share your experience:
 
 - **[Report a Bug](https://github.com/KagisoLesomo/OTP/issues)**: Create a GitHub issue with details
 - **[Feature Request](https://github.com/KagisoLesomo/OTP/issues)**: Suggest new games or features
-- **[Discussions](https://github.com/KagisoLesomo/OTP/discussions)**: Join community discussions
-- **Direct Contact**: Reach out to the authors
 
 ---
 
